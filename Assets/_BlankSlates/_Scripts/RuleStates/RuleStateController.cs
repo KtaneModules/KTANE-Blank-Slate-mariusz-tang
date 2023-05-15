@@ -4,8 +4,22 @@ using UnityEngine;
 
 public abstract class RuleStateController : MonoBehaviour {
 
-    public abstract IEnumerator OnStateEnter(int pressedRegion);
+    protected BlankSlatesModule _module;
 
-    public abstract void HandleRegionPress(int pressedRegion);
+    protected void Awake() {
+        _module = GetComponentInParent<BlankSlatesModule>();
+    }
+
+    public abstract IEnumerator OnStateEnter(Region pressedRegion);
+
+    public abstract IEnumerator HandleRegionPress(Region pressedRegion);
+
+    public virtual IEnumerator HandleTP(string command) {
+        throw new System.NotImplementedException();
+    }
+
+    public virtual IEnumerator Autosolve() {
+        throw new System.NotImplementedException();
+    }
 
 }
