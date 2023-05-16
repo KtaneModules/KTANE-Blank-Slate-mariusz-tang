@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 868d7818a1982524bb627dbde312beda
+guid: 345a6f497dedc344f916b2ef9dcfa01d
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: righttriangle
-    100002: //RootNode
-    400000: righttriangle
-    400002: //RootNode
+    100000: //RootNode
+    100002: righttriangle
+    400000: //RootNode
+    400002: righttriangle
     2100000: righttriangleMat
     2300000: righttriangle
     3300000: righttriangle

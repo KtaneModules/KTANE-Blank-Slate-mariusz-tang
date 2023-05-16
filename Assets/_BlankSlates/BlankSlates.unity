@@ -268,11 +268,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _crackTextures.Array.size
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 4079886019656916, guid: ec41aaf716553f541a76242b0828a954, type: 2}
       propertyPath: m_LocalPosition.x
       value: -0.42397833
@@ -305,46 +300,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _crackTextures.Array.data[0]
-      value: 
-      objectReference: {fileID: 2800000, guid: d6e630e683fc3d7498acc5da23eaf029, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _crackTextures.Array.data[1]
-      value: 
-      objectReference: {fileID: 2800000, guid: becb1442df8379845bce2e2890c8fdea, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _crackTextures.Array.data[2]
-      value: 
-      objectReference: {fileID: 2800000, guid: 3e1e4a3bbb4a495419822d2942099db2, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _crackTextures.Array.data[3]
-      value: 
-      objectReference: {fileID: 2800000, guid: c7362b798b7dcbf489d9f07d16c02399, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _crackTextures.Array.data[4]
-      value: 
-      objectReference: {fileID: 2800000, guid: a9a21ad144880df449f49f4a582b949f, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _crackTextures.Array.data[5]
-      value: 
-      objectReference: {fileID: 2800000, guid: 05c4139fa7debcf469647b36bd583320, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _crackTextures.Array.data[6]
-      value: 
-      objectReference: {fileID: 2800000, guid: 4750a39b6c4a5744087f4de1a380bef7, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _crackTextures.Array.data[7]
-      value: 
-      objectReference: {fileID: 2800000, guid: c27b83f0429bb85419d213ad551a4a2f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec41aaf716553f541a76242b0828a954, type: 2}
   m_IsPrefabParent: 0

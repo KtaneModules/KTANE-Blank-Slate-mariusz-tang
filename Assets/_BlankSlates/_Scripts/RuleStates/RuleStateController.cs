@@ -15,6 +15,10 @@ public abstract class RuleStateController : MonoBehaviour {
 
     public abstract IEnumerator HandleRegionPress(Region pressedRegion);
 
+    public virtual IEnumerator SolveAnimation() {
+        throw new System.NotImplementedException();
+    }
+
     public virtual IEnumerator HandleTP(string command) {
         throw new System.NotImplementedException();
     }
