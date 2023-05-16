@@ -1,0 +1,10 @@
+o halftrapezoid
+v -.8 0 .8
+v .3 0 .8
+v .8 0 -.8
+v -.8 0 -.8
+v .2 0 -.8
+vn 0 -10 0
+g halftrapezoid
+f 1 2 5 4
+f 2 3 5

@@ -1,0 +1,9 @@
+o talltrapezoid
+v -.5 0 1
+v .5 0 1
+v 1 0 -1
+v -1 0 -1
+vn 0 -1 0
+g talltrapezoid
+f 1 2 4
+f 2 3 4

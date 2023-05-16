@@ -1,0 +1,6 @@
+o isotriangle
+v 0 0 .9
+v .5 0 -.9
+v -.5 0 -.9
+g isotriangle
+f 1 2 3

@@ -1,0 +1,9 @@
+o uparrowhead
+v 0 0 .6
+v 0 0 .2
+v -.9 0 0
+v .9 0 0
+vn 0 -1 0
+g uparrowhead
+f 1 2 3
+f 1 4 2

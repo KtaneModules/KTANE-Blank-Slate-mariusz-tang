@@ -1,0 +1,7 @@
+o righttriangle
+v -0.9 0 0.9
+v 0.9 0 -0.9
+v -0.9 0 -0.9
+vn 0 -1 0
+g righttriangle
+f 1 2 3

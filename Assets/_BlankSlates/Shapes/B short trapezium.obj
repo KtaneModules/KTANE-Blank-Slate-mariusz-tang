@@ -1,0 +1,9 @@
+o shorttrapezoid
+v -.4 0 .5
+v .4 0 .5
+v 1 0 -.5
+v -1 0 -.5
+vn 0 -1 0
+g shorttrapezoid
+f 1 2 4
+f 2 3 4
