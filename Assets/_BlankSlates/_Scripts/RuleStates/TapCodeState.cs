@@ -27,11 +27,11 @@ public class TapCodeState : RuleStateController {
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
         yield return null;
-        _originRegionNumber = pressedRegion.Position;
+        _originRegionNumber = pressedRegion.Number;
         _module.Log($"Region {_originRegionNumber} is playing tap code.");
         _targetRegionNumber = _module.AvailableRegions.PickRandom();
 
-        int forwardDistance = (_targetRegionNumber - pressedRegion.Position + 8) % 8;
+        int forwardDistance = (_targetRegionNumber - pressedRegion.Number + 8) % 8;
         _tappedWord = _words[forwardDistance - 1].PickRandom();
 
         _module.Log($"The word being transmitted is {_tappedWord}.");
@@ -42,7 +42,7 @@ public class TapCodeState : RuleStateController {
     }
 
     public override IEnumerator HandleRegionPress(Region pressedRegion) {
-        int pressedPosition = pressedRegion.Position;
+        int pressedPosition = pressedRegion.Number;
 
         StopPlaying();
 

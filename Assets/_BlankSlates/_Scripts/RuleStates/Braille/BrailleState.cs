@@ -77,7 +77,7 @@ public class BrailleState : RuleStateController {
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
         yield return null;
-        _originRegionNumber = pressedRegion.Position;
+        _originRegionNumber = pressedRegion.Number;
         _module.Log($"Region {_originRegionNumber} is cycling braille.");
 
         _targetRegionNumber = _module.AvailableRegions.PickRandom();
@@ -94,7 +94,7 @@ public class BrailleState : RuleStateController {
     }
 
     public override IEnumerator HandleRegionPress(Region pressedRegion) {
-        int pressedPosition = pressedRegion.Position;
+        int pressedPosition = pressedRegion.Number;
 
         StopFlashing();
 

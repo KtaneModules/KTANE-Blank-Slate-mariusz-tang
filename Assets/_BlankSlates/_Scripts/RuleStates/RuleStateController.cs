@@ -10,6 +10,7 @@ public abstract class RuleStateController : MonoBehaviour {
         _module = GetComponentInParent<BlankSlatesModule>();
     }
 
+    // On second thought, OnStateEnter and HandleRegionPress should not have been coroutines by default, but oh well.
     public abstract IEnumerator OnStateEnter(Region pressedRegion);
 
     public abstract IEnumerator HandleRegionPress(Region pressedRegion);

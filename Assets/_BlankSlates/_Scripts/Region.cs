@@ -7,11 +7,11 @@ using UnityEngine;
 public class Region : MonoBehaviour {
 
     public KMSelectable Selectable { get; private set; }
-    public int Position { get; private set; }
+    public int Number { get; private set; }
 
     private void Awake() {
         Selectable = GetComponent<KMSelectable>();
-        Position = int.Parse(transform.name);
+        Number = int.Parse(transform.name);
     }
 
     private void Start() {
