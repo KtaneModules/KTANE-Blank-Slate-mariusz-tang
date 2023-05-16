@@ -43,7 +43,7 @@ public class BlankSlatesModule : MonoBehaviour {
 
     private void HandleRegionPress(Region pressedRegion) {
         if (_currentRuleState == null) {
-            AvailableRegions.Remove(pressedRegion.Position);
+            AvailableRegions.Remove(pressedRegion.Number);
             GetNewState(pressedRegion);
             return;
         }
@@ -52,9 +52,12 @@ public class BlankSlatesModule : MonoBehaviour {
 
     public void GetNewState(Region pressedRegion) {
         int stateIndex = _availableRuleStates.PickRandom();
-        Log("-=-=-=-=-=-");
+        _availableRuleStates.Remove(stateIndex);
+
         _currentRuleState = _rulesStates[stateIndex];
-        AvailableRegions.Remove(pressedRegion.Position);
+        AvailableRegions.Remove(pressedRegion.Number);
+
+        Log("-=-=-=-=-=-");
         StartCoroutine(_currentRuleState.OnStateEnter(pressedRegion));
     }
 

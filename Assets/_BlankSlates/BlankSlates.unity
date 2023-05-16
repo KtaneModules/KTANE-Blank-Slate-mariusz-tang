@@ -120,6 +120,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114848120511536268, guid: 8814ea52310d2614a9feda02ec355ae4,
+        type: 2}
+      propertyPath: AudioClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 439642, guid: 8814ea52310d2614a9feda02ec355ae4, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -152,39 +157,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114848120511536268, guid: 8814ea52310d2614a9feda02ec355ae4,
+        type: 2}
+      propertyPath: AudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 878d036a15841324684c782ca3da7f1f, type: 3}
+    - target: {fileID: 114848120511536268, guid: 8814ea52310d2614a9feda02ec355ae4,
+        type: 2}
+      propertyPath: AudioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 79ecb67082e1b7f488c95498e5430369, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8814ea52310d2614a9feda02ec355ae4, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &262472527 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114553672700011682, guid: ec41aaf716553f541a76242b0828a954,
-    type: 2}
-  m_PrefabInternal: {fileID: 1905208198}
-  m_Script: {fileID: 11500000, guid: f6212bf7420c8a14ea183b83fdaa3bc3, type: 3}
---- !u!114 &853012615 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114323225023983020, guid: ec41aaf716553f541a76242b0828a954,
-    type: 2}
-  m_PrefabInternal: {fileID: 1905208198}
-  m_Script: {fileID: 11500000, guid: 6b97ec8acb842554a8391246fb59b957, type: 3}
---- !u!114 &1077901621 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114510526367791358, guid: ec41aaf716553f541a76242b0828a954,
-    type: 2}
-  m_PrefabInternal: {fileID: 1905208198}
-  m_Script: {fileID: 11500000, guid: 6b97ec8acb842554a8391246fb59b957, type: 3}
---- !u!114 &1423029740 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114789008889505106, guid: ec41aaf716553f541a76242b0828a954,
-    type: 2}
-  m_PrefabInternal: {fileID: 1905208198}
-  m_Script: {fileID: 11500000, guid: 6b97ec8acb842554a8391246fb59b957, type: 3}
---- !u!114 &1502553480 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114210019366588784, guid: ec41aaf716553f541a76242b0828a954,
-    type: 2}
-  m_PrefabInternal: {fileID: 1905208198}
-  m_Script: {fileID: 11500000, guid: 6b97ec8acb842554a8391246fb59b957, type: 3}
 --- !u!1 &1793295349
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,12 +251,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1864153252 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114674146426048330, guid: ec41aaf716553f541a76242b0828a954,
-    type: 2}
-  m_PrefabInternal: {fileID: 1905208198}
-  m_Script: {fileID: 11500000, guid: 6b97ec8acb842554a8391246fb59b957, type: 3}
 --- !u!1001 &1905208198
 Prefab:
   m_ObjectHideFlags: 0
@@ -279,10 +258,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114553672700011682, guid: ec41aaf716553f541a76242b0828a954,
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
         type: 2}
-      propertyPath: _brailleDots.Array.size
-      value: 6
+      propertyPath: _crackTextures.Array.size
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4079886019656916, guid: ec41aaf716553f541a76242b0828a954, type: 2}
       propertyPath: m_LocalPosition.x
@@ -316,46 +295,46 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114209229624863822, guid: ec41aaf716553f541a76242b0828a954,
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
         type: 2}
-      propertyPath: _brailleGrid
+      propertyPath: _crackTextures.Array.data[0]
       value: 
-      objectReference: {fileID: 262472527}
-    - target: {fileID: 114553672700011682, guid: ec41aaf716553f541a76242b0828a954,
+      objectReference: {fileID: 2800000, guid: d6e630e683fc3d7498acc5da23eaf029, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
         type: 2}
-      propertyPath: _dotMaterialBase
+      propertyPath: _crackTextures.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 5f9a3d1f2de088c41abe352e0c799f21, type: 2}
-    - target: {fileID: 114553672700011682, guid: ec41aaf716553f541a76242b0828a954,
+      objectReference: {fileID: 2800000, guid: becb1442df8379845bce2e2890c8fdea, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
         type: 2}
-      propertyPath: _brailleDots.Array.data[0]
+      propertyPath: _crackTextures.Array.data[2]
       value: 
-      objectReference: {fileID: 1864153252}
-    - target: {fileID: 114553672700011682, guid: ec41aaf716553f541a76242b0828a954,
+      objectReference: {fileID: 2800000, guid: 3e1e4a3bbb4a495419822d2942099db2, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
         type: 2}
-      propertyPath: _brailleDots.Array.data[1]
+      propertyPath: _crackTextures.Array.data[3]
       value: 
-      objectReference: {fileID: 1423029740}
-    - target: {fileID: 114553672700011682, guid: ec41aaf716553f541a76242b0828a954,
+      objectReference: {fileID: 2800000, guid: c7362b798b7dcbf489d9f07d16c02399, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
         type: 2}
-      propertyPath: _brailleDots.Array.data[2]
+      propertyPath: _crackTextures.Array.data[4]
       value: 
-      objectReference: {fileID: 1502553480}
-    - target: {fileID: 114553672700011682, guid: ec41aaf716553f541a76242b0828a954,
+      objectReference: {fileID: 2800000, guid: a9a21ad144880df449f49f4a582b949f, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
         type: 2}
-      propertyPath: _brailleDots.Array.data[3]
+      propertyPath: _crackTextures.Array.data[5]
       value: 
-      objectReference: {fileID: 2011359093}
-    - target: {fileID: 114553672700011682, guid: ec41aaf716553f541a76242b0828a954,
+      objectReference: {fileID: 2800000, guid: 05c4139fa7debcf469647b36bd583320, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
         type: 2}
-      propertyPath: _brailleDots.Array.data[4]
+      propertyPath: _crackTextures.Array.data[6]
       value: 
-      objectReference: {fileID: 1077901621}
-    - target: {fileID: 114553672700011682, guid: ec41aaf716553f541a76242b0828a954,
+      objectReference: {fileID: 2800000, guid: 4750a39b6c4a5744087f4de1a380bef7, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
         type: 2}
-      propertyPath: _brailleDots.Array.data[5]
+      propertyPath: _crackTextures.Array.data[7]
       value: 
-      objectReference: {fileID: 853012615}
+      objectReference: {fileID: 2800000, guid: c27b83f0429bb85419d213ad551a4a2f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec41aaf716553f541a76242b0828a954, type: 2}
   m_IsPrefabParent: 0
@@ -424,9 +403,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &2011359093 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114154818731467202, guid: ec41aaf716553f541a76242b0828a954,
-    type: 2}
-  m_PrefabInternal: {fileID: 1905208198}
-  m_Script: {fileID: 11500000, guid: 6b97ec8acb842554a8391246fb59b957, type: 3}
