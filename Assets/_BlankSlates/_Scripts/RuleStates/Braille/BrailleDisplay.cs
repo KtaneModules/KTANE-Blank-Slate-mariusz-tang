@@ -7,9 +7,9 @@ public class BrailleDisplay : MonoBehaviour {
 
     [SerializeField] private BrailleDot[] _brailleDots;
 
-    public void Display(int[] positions, Color colour) {
+    public void Display(List<int> positions, Color colour) {
         foreach (BrailleDot dot in _brailleDots) {
-            if (Array.Exists(positions, p => p == dot.Position)) {
+            if (positions.Contains(dot.Position)) {
                 dot.Renderer.enabled = true;
                 dot.Renderer.material.SetColor("_OutlineColor", colour);
             }

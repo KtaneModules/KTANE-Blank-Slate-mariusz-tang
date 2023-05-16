@@ -1,44 +1,46 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using KModkit;
 using UnityEngine;
 
 public class BrailleState : RuleStateController {
 
     // I have only included the braille characters used in this module since the word list is unlikely to change.
-    private readonly Dictionary<string, int[]> _braille = new Dictionary<string, int[]> {
-        { "a", new int[] { 1 }},
-        { "b", new int[] { 1, 2 }},
-        { "c", new int[] { 1, 4 }},
-        { "d", new int[] { 1, 4, 5 }},
-        { "e", new int[] { 1, 5 }},
-        { "f", new int[] { 1, 2, 4 }},
-        { "h", new int[] { 1, 2, 5 }},
-        { "i", new int[] { 2, 4 }},
-        { "k", new int[] { 1, 3 }},
-        { "l", new int[] { 1, 2, 3 }},
-        { "m", new int[] { 1, 3, 4 }},
-        { "n", new int[] { 1, 3, 4, 5 }},
-        { "o", new int[] { 1, 3, 5 }},
-        { "p", new int[] { 1, 2, 3, 4 }},
-        { "r", new int[] { 1, 2, 3, 5 }},
-        { "s", new int[] { 2, 3, 4 }},
-        { "t", new int[] { 2, 3, 4, 5 }},
-        { "u", new int[] { 1, 3, 6 }},
-        { "w", new int[] { 2, 4, 5, 6 }},
-        { "x", new int[] { 1, 3, 4, 6 }},
-        { "y", new int[] { 1, 3, 4, 5, 6 }},
-        { "ar", new int[] { 3, 4, 5 }},
-        { "ch", new int[] { 1, 6 }},
-        { "ea", new int[] { 2 }},
-        { "en", new int[] { 2, 6 }},
-        { "gh", new int[] { 1, 2, 6 }},
-        { "in", new int[] { 3, 5 }},
-        { "ou", new int[] { 1, 2, 5, 6 }},
-        { "ow", new int[] { 2, 4, 6 }},
-        { "sh", new int[] { 1, 4, 6 }},
-        { "st", new int[] { 3, 4 }},
-        { "th", new int[] { 1, 4, 5, 6 }},
+    private readonly Dictionary<string, List<int>> _braille = new Dictionary<string, List<int>> {
+        { "a", new List<int> { 1 }},
+        { "b", new List<int> { 1, 2 }},
+        { "c", new List<int> { 1, 4 }},
+        { "d", new List<int> { 1, 4, 5 }},
+        { "e", new List<int> { 1, 5 }},
+        { "f", new List<int> { 1, 2, 4 }},
+        { "h", new List<int> { 1, 2, 5 }},
+        { "i", new List<int> { 2, 4 }},
+        { "k", new List<int> { 1, 3 }},
+        { "l", new List<int> { 1, 2, 3 }},
+        { "m", new List<int> { 1, 3, 4 }},
+        { "n", new List<int> { 1, 3, 4, 5 }},
+        { "o", new List<int> { 1, 3, 5 }},
+        { "p", new List<int> { 1, 2, 3, 4 }},
+        { "r", new List<int> { 1, 2, 3, 5 }},
+        { "s", new List<int> { 2, 3, 4 }},
+        { "t", new List<int> { 2, 3, 4, 5 }},
+        { "u", new List<int> { 1, 3, 6 }},
+        { "w", new List<int> { 2, 4, 5, 6 }},
+        { "x", new List<int> { 1, 3, 4, 6 }},
+        { "y", new List<int> { 1, 3, 4, 5, 6 }},
+        { "ar", new List<int> { 3, 4, 5 }},
+        { "ch", new List<int> { 1, 6 }},
+        { "ea", new List<int> { 2 }},
+        { "en", new List<int> { 2, 6 }},
+        { "gh", new List<int> { 1, 2, 6 }},
+        { "in", new List<int> { 3, 5 }},
+        { "ou", new List<int> { 1, 2, 5, 6 }},
+        { "ow", new List<int> { 2, 4, 6 }},
+        { "sh", new List<int> { 1, 4, 6 }},
+        { "st", new List<int> { 3, 4 }},
+        { "th", new List<int> { 1, 4, 5, 6 }},
     };
     private readonly string[,][] _wordsSplit = new string[,][] {
         { new string[] { "en", "d", "s" }, new string[] { "d", "ow", "n" }, new string[] { "t", "ea", "m" } },
@@ -50,14 +52,26 @@ public class BrailleState : RuleStateController {
         { new string[] { "b", "e", "e" }, new string[] { "w", "ea", "k" }, new string[] { "w", "e", "t" } },
         { new string[] { "sh", "ow", "n" }, new string[] { "p", "o", "p" }, new string[] { "th", "ou", "gh" } },
     };
+    private readonly int[][] _serialCharacterPositions = new int[][] {
+        new int[] { 1, 2, 3 },
+        new int[] { 4, 5, 6 },
+        new int[] { 1, 3, 5 },
+        new int[] { 2, 4, 6 },
+        new int[] { 1, 3, 4 },
+        new int[] { 2, 5, 6 },
+        new int[] { 1, 4, 6 },
+        new int[] { 2, 3, 5 },
+    };
     private readonly Color[] _colours = new Color[] { Color.red, Color.green, Color.blue };
 
     [SerializeField] private BrailleDisplay _brailleGrid;
 
-    private int _originRegion;
-    private int _targetRegion;
+    private int _originRegionNumber;
+    private int _targetRegionNumber;
     private int _wordNumber;
+
     private string[] _flashingWordSplit;
+    private List<int>[] _flashingDots;
 
     private Coroutine _flashingSequence;
 
@@ -66,9 +80,9 @@ public class BrailleState : RuleStateController {
 
         StopFlashing();
 
-        if (pressedPosition != _originRegion) {
-            if (pressedPosition == _targetRegion) {
-                // _module.GetNewState(pressedRegion);
+        if (pressedPosition != _originRegionNumber) {
+            if (pressedPosition == _targetRegionNumber) {
+                // ! _module.GetNewState(pressedRegion);
                 _module.Log("Correct!");
             }
             else {
@@ -91,26 +105,80 @@ public class BrailleState : RuleStateController {
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
         yield return null;
-        _originRegion = pressedRegion.Position;
-        _module.Log("The pressed region is cycling braille.");
+        _originRegionNumber = pressedRegion.Position;
+        _module.Log($"Region {pressedRegion.Position} is cycling braille.");
 
-        _targetRegion = _module.AvailableRegions.PickRandom();
-        _module.AvailableRegions.Remove(_targetRegion);
+        _targetRegionNumber = _module.AvailableRegions.PickRandom();
+        _module.AvailableRegions.Remove(_targetRegionNumber);
 
         _wordNumber = UnityEngine.Random.Range(0, 3);
-        _flashingWordSplit = _wordsSplit[_targetRegion - 1, _wordNumber];
+        _flashingWordSplit = _wordsSplit[_targetRegionNumber - 1, _wordNumber];
+        _flashingDots = GetFlashingDots(_flashingWordSplit);
 
-        _module.Log($"The cycled word is {CombineWord(_flashingWordSplit)}.");
-        _module.Log($"The corresponding region is press is {_targetRegion}.");
+        _module.Log($"The cycled word is \"{CombineWord(_flashingWordSplit)}\".");
+        _module.Log($"The corresponding region is press is {_targetRegionNumber}.");
 
         transform.position = pressedRegion.transform.position;
         _flashingSequence = StartCoroutine(FlashSequence());
     }
 
-    private IEnumerator FlashSequence() {
-        Debug.Log("Flashing");
+    private List<int>[] GetFlashingDots(string[] flashingWordSplit) {
+        var flashingDots = new List<int>[3];
+        List<int> invertedPositions = GetInvertedPositions();
+
         for (int i = 0; i < 3; i++) {
-            _brailleGrid.Display(_braille[_flashingWordSplit[i]], _colours[i]);
+            flashingDots[i] = _braille[flashingWordSplit[i]];
+
+            foreach (int invertPosition in invertedPositions) {
+                if (invertPosition > 6 * i && invertPosition <= 6 * (i + 1)) {
+                    if (flashingDots[i].Contains(invertPosition - 6 * i)) {
+                        flashingDots[i].Remove(invertPosition - 6 * i);
+                    }
+                    else {
+                        flashingDots[i].Add(invertPosition - 6 * i);
+                    }
+                }
+            }
+        }
+
+        return flashingDots;
+    }
+
+    private List<int> GetInvertedPositions() {
+        var invertedPositionsReading = new List<int>();
+
+        _module.Log("Inversions:");
+        foreach (int serialPosition in _serialCharacterPositions[_originRegionNumber - 1]) {
+            char character = _module.BombInfo.GetSerialNumber()[serialPosition - 1];
+            int invertPosition;
+            if (char.IsDigit(character)) {
+                invertPosition = character - '0';
+            }
+            else {
+                invertPosition = (character - 'A' + 1) % 18;
+            }
+
+            if (invertPosition == 0) {
+                invertPosition = 1;
+            }
+            _module.Log($"The serial number character in position {serialPosition} is {character}, which yields position {invertPosition} in individual reading order.");
+
+            if (invertedPositionsReading.Contains(invertPosition)) {
+                invertedPositionsReading.Remove(invertPosition);
+            }
+            else {
+                invertedPositionsReading.Add(invertPosition);
+            }
+        }
+
+        // Convert from indivial reading order to individual braille order.
+        List<int> invertedPositionsBraille = invertedPositionsReading.Select(p => p - p % 6 + (p % 6) / 2 + (p % 2 == 0 ? 3 : 1)).ToList();
+        return invertedPositionsBraille;
+    }
+
+    private IEnumerator FlashSequence() {
+        for (int i = 0; i < 3; i++) {
+            _brailleGrid.Display(_flashingDots[i], _colours[i]);
             yield return new WaitForSeconds(0.8f);
         }
         _brailleGrid.Clear();

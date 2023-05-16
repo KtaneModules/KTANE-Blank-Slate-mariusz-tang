@@ -9,9 +9,6 @@ public class BlankSlatesModule : MonoBehaviour {
     // ! Need to check for the case where all the colour values for Polygons rule share parity,
     // ! in which case change the way polygons is selected.
     // ! Punctuation Marks rule must not be last, to allow for the solution colour to move with the rest.
-
-    private KMBombInfo _bomb;
-    private KMAudio _audio;
     private KMBombModule _module;
 
     private static int _moduleCounter = 0;
@@ -25,14 +22,16 @@ public class BlankSlatesModule : MonoBehaviour {
 
     public List<int> AvailableRegions { get; private set; }
     public Region[] Regions { get { return _regions.ToArray(); } }
+    public KMBombInfo BombInfo { get; private set; }
+    public KMAudio BombAudio { get; private set; }
 
     private void Awake() {
         _moduleId = _moduleCounter++;
-        _bomb = GetComponent<KMBombInfo>();
-        _audio = GetComponent<KMAudio>();
         _module = GetComponent<KMBombModule>();
         _availableRuleStates = Enumerable.Range(0, _rulesStates.Count()).ToList();
 
+        BombInfo = GetComponent<KMBombInfo>();
+        BombAudio = GetComponent<KMAudio>();
         AvailableRegions = Enumerable.Range(1, 8).ToList();
     }
 
@@ -44,6 +43,7 @@ public class BlankSlatesModule : MonoBehaviour {
 
     private void HandleRegionPress(Region pressedRegion) {
         if (_currentRuleState == null) {
+            AvailableRegions.Remove(pressedRegion.Position);
             GetNewState(pressedRegion);
             return;
         }
