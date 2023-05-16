@@ -646,6 +646,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1933899200460012
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4609156702511700}
+  - component: {fileID: 114172016576079106}
+  m_Layer: 0
+  m_Name: TapCode
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1963417808557448
 GameObject:
   m_ObjectHideFlags: 1
@@ -803,6 +819,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4272552473824020}
+  - {fileID: 4609156702511700}
   m_Father: {fileID: 4079886019656916}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1072,6 +1089,19 @@ Transform:
   - {fileID: 4443904102575784}
   - {fileID: 4846054738833704}
   m_Father: {fileID: 4079886019656916}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4609156702511700
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1933899200460012}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4150219329018032}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4616463505488354
@@ -2124,6 +2154,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50670d051975fbd43a07b31fc4d693e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114172016576079106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1933899200460012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba6427f7731af4840ae7561ff60f0b16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114190914454377284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2145,7 +2186,7 @@ MonoBehaviour:
   - {fileID: 114254157107629460}
   - {fileID: 114260087257042786}
   _rulesStates:
-  - {fileID: 114209229624863822}
+  - {fileID: 114172016576079106}
 --- !u!114 &114205420700803376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2187,7 +2228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d34659e3ef382e4497c0e968fffe7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _brailleGrid: {fileID: 0}
+  _brailleGrid: {fileID: 114553672700011682}
 --- !u!114 &114210019366588784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2381,8 +2422,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6212bf7420c8a14ea183b83fdaa3bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _brailleDots: []
-  _dotMaterialBase: {fileID: 0}
+  _brailleDots:
+  - {fileID: 114674146426048330}
+  - {fileID: 114789008889505106}
+  - {fileID: 114210019366588784}
+  - {fileID: 114154818731467202}
+  - {fileID: 114510526367791358}
+  - {fileID: 114323225023983020}
 --- !u!114 &114591074730652808
 MonoBehaviour:
   m_ObjectHideFlags: 1

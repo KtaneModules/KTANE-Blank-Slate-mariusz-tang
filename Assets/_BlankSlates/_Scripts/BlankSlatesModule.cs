@@ -52,7 +52,9 @@ public class BlankSlatesModule : MonoBehaviour {
 
     public void GetNewState(Region pressedRegion) {
         int stateIndex = _availableRuleStates.PickRandom();
+        Log("-=-=-=-=-=-");
         _currentRuleState = _rulesStates[stateIndex];
+        AvailableRegions.Remove(pressedRegion.Position);
         StartCoroutine(_currentRuleState.OnStateEnter(pressedRegion));
     }
 

@@ -75,6 +75,24 @@ public class BrailleState : RuleStateController {
 
     private Coroutine _flashingSequence;
 
+    public override IEnumerator OnStateEnter(Region pressedRegion) {
+        yield return null;
+        _originRegionNumber = pressedRegion.Position;
+        _module.Log($"Region {_originRegionNumber} is cycling braille.");
+
+        _targetRegionNumber = _module.AvailableRegions.PickRandom();
+
+        _wordNumber = UnityEngine.Random.Range(0, 3);
+        _flashingWordSplit = _wordsSplit[_targetRegionNumber - 1, _wordNumber];
+        _flashingDots = GetFlashingDots(_flashingWordSplit);
+
+        _module.Log($"The cycled word is \"{CombineWord(_flashingWordSplit)}\".");
+        _module.Log($"The corresponding region is press is {_targetRegionNumber}.");
+
+        transform.position = pressedRegion.transform.position;
+        _flashingSequence = StartCoroutine(FlashSequence());
+    }
+
     public override IEnumerator HandleRegionPress(Region pressedRegion) {
         int pressedPosition = pressedRegion.Position;
 
@@ -87,7 +105,7 @@ public class BrailleState : RuleStateController {
             }
             else {
                 _module.Strike($"Incorrectly pressed region {pressedPosition}. Strike!");
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(0.5f);
                 _flashingSequence = StartCoroutine(FlashSequence());
             }
         }
@@ -101,25 +119,6 @@ public class BrailleState : RuleStateController {
             StopCoroutine(_flashingSequence);
             _brailleGrid.Clear();
         }
-    }
-
-    public override IEnumerator OnStateEnter(Region pressedRegion) {
-        yield return null;
-        _originRegionNumber = pressedRegion.Position;
-        _module.Log($"Region {pressedRegion.Position} is cycling braille.");
-
-        _targetRegionNumber = _module.AvailableRegions.PickRandom();
-        _module.AvailableRegions.Remove(_targetRegionNumber);
-
-        _wordNumber = UnityEngine.Random.Range(0, 3);
-        _flashingWordSplit = _wordsSplit[_targetRegionNumber - 1, _wordNumber];
-        _flashingDots = GetFlashingDots(_flashingWordSplit);
-
-        _module.Log($"The cycled word is \"{CombineWord(_flashingWordSplit)}\".");
-        _module.Log($"The corresponding region is press is {_targetRegionNumber}.");
-
-        transform.position = pressedRegion.transform.position;
-        _flashingSequence = StartCoroutine(FlashSequence());
     }
 
     private List<int>[] GetFlashingDots(string[] flashingWordSplit) {
