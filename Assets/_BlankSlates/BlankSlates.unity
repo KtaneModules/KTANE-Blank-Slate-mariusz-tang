@@ -180,23 +180,24 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8814ea52310d2614a9feda02ec355ae4, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &929518115
+--- !u!114 &446838132 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114401947205352446, guid: ec41aaf716553f541a76242b0828a954,
+    type: 2}
+  m_PrefabInternal: {fileID: 1247735188}
+  m_Script: {fileID: 1702003387, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
+--- !u!1 &594067917 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1596909338757692, guid: ec41aaf716553f541a76242b0828a954,
+    type: 2}
+  m_PrefabInternal: {fileID: 1247735188}
+--- !u!1001 &1247735188
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114205420700803376, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: Children.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 114592657966831492, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: SelectableColliders.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4079886019656916, guid: ec41aaf716553f541a76242b0828a954, type: 2}
       propertyPath: m_LocalPosition.x
       value: -0.42397833
@@ -229,33 +230,50 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114205420700803376, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: Children.Array.data[8]
-      value: 
-      objectReference: {fileID: 1637576973}
-    - target: {fileID: 114205420700803376, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: Children.Array.data[9]
-      value: 
-      objectReference: {fileID: 1637576973}
+    - target: {fileID: 1227108170924198, guid: ec41aaf716553f541a76242b0828a954, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 23081049786214928, guid: ec41aaf716553f541a76242b0828a954,
         type: 2}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4960291838034614, guid: ec41aaf716553f541a76242b0828a954, type: 2}
-      propertyPath: m_LocalScale.y
-      value: -0.019252
+    - target: {fileID: 114401947205352446, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: Parent
+      value: 
+      objectReference: {fileID: 1446367907}
+    - target: {fileID: 114561928343694516, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: _highlight
+      value: 
+      objectReference: {fileID: 594067917}
+    - target: {fileID: 1596909338757692, guid: ec41aaf716553f541a76242b0828a954, type: 2}
+      propertyPath: m_Name
+      value: Highlight
       objectReference: {fileID: 0}
+    - target: {fileID: 4198902893699874, guid: ec41aaf716553f541a76242b0828a954, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4028221402804122, guid: ec41aaf716553f541a76242b0828a954, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114561928343694516, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: _selectable
+      value: 
+      objectReference: {fileID: 446838132}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec41aaf716553f541a76242b0828a954, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1637576973 stripped
+--- !u!114 &1446367907 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114592657966831492, guid: ec41aaf716553f541a76242b0828a954,
+  m_PrefabParentObject: {fileID: 114205420700803376, guid: ec41aaf716553f541a76242b0828a954,
     type: 2}
-  m_PrefabInternal: {fileID: 929518115}
+  m_PrefabInternal: {fileID: 1247735188}
   m_Script: {fileID: 1702003387, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
 --- !u!1 &1793295349
 GameObject:

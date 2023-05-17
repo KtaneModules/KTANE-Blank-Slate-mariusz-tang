@@ -11,14 +11,22 @@ public class PolygonsState : RuleStateController {
     [SerializeField] GameObject[] _secondPair;
     [SerializeField] GameObject[] _thirdPair;
     [SerializeField] GameObject[] _fourthPair;
+    [SerializeField] GameObject _highlight;
+    [SerializeField] KMSelectable _selectable;
 
     private Dictionary<char, int> _colourParities;
+    private KMHighlightable _originalHighlight;
 
     public bool CanPickEven { get; private set; }
     public bool CanPickOdd { get; private set; }
 
     private void Start() {
         SetColourParities();
+
+        _selectable.OnHighlight += delegate () { _highlight.GetComponent<MeshRenderer>().enabled = true; };
+        _selectable.OnHighlightEnded += delegate () { _highlight.GetComponent<MeshRenderer>().enabled = false; };
+        _module.GetComponent<KMSelectable>().Children[8] = _selectable;
+        _module.GetComponent<KMSelectable>().UpdateChildrenProperly();
     }
 
     private void SetColourParities() {
@@ -37,11 +45,17 @@ public class PolygonsState : RuleStateController {
         CanPickOdd = _colourParities.ContainsValue(1);
     }
 
-    public override IEnumerator HandleRegionPress(Region pressedRegion) {
-        throw new System.NotImplementedException();
+    public override IEnumerator OnStateEnter(Region pressedRegion) {
+        yield return null;
+        _originalHighlight = pressedRegion.Selectable.Highlight;
+        transform.position = pressedRegion.transform.position;
+
+        _module.GetComponent<KMSelectable>().Children[8] = null;
+        _module.GetComponent<KMSelectable>().UpdateChildrenProperly();
+        _selectable.gameObject.SetActive(false);
     }
 
-    public override IEnumerator OnStateEnter(Region pressedRegion) {
+    public override IEnumerator HandleRegionPress(Region pressedRegion) {
         throw new System.NotImplementedException();
     }
 }
