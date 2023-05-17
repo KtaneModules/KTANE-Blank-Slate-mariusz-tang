@@ -9,13 +9,18 @@ public class BlankSlatesModule : MonoBehaviour {
     // ! Need to check for the case where all the colour values for Polygons rule share parity,
     // ! in which case change the way polygons is selected.
     // ! Punctuation Marks rule must not be last, to allow for the solution colour to move with the rest.
+    // ! If Punctuation Marks is second-to-last and polygons requires a specific parity, then pick Punctuation Marks but
+    // ! force it to pick the other parity.
     private KMBombModule _module;
 
     private static int _moduleCounter = 0;
     private int _moduleId;
 
     [SerializeField] private Region[] _regions;
-    [SerializeField] private RuleStateController[] _rulesStates;
+    // Polygons is special in that in rare cases it is unable to pick an odd region or an even region.
+    // Punctuation marks is special in that it the correct region is undecided, so it must not be last.
+    [SerializeField] private RuleStateController[] _rulesStatesMinusPolygons;
+    [SerializeField] private PolygonsState _polygons;
 
     private List<int> _availableRuleStates;
     private RuleStateController _currentRuleState;
@@ -28,7 +33,7 @@ public class BlankSlatesModule : MonoBehaviour {
     private void Awake() {
         _moduleId = _moduleCounter++;
         _module = GetComponent<KMBombModule>();
-        _availableRuleStates = Enumerable.Range(0, _rulesStates.Count()).ToList();
+        _availableRuleStates = Enumerable.Range(0, _rulesStatesMinusPolygons.Count() + 1).ToList();
 
         BombInfo = GetComponent<KMBombInfo>();
         BombAudio = GetComponent<KMAudio>();
@@ -52,9 +57,22 @@ public class BlankSlatesModule : MonoBehaviour {
 
     public void GetNewState(Region pressedRegion) {
         int stateIndex = _availableRuleStates.PickRandom();
-        _availableRuleStates.Remove(stateIndex);
 
-        _currentRuleState = _rulesStates[stateIndex];
+        if (!_polygons.CanPickEven && AvailableRegions.Count(r => r % 2 != 0) == 1) {
+            stateIndex = 0;
+        }
+        else if (!_polygons.CanPickOdd && AvailableRegions.Count(r => r % 2 != 1) == 1) {
+            stateIndex = 0;
+        }
+
+        if (stateIndex == 0) {
+            _currentRuleState = _polygons;
+        }
+        else {
+            _currentRuleState = _rulesStatesMinusPolygons[stateIndex - 1];
+        }
+
+        _availableRuleStates.Remove(stateIndex);
         AvailableRegions.Remove(pressedRegion.Number);
 
         Log("-=-=-=-=-=-");
