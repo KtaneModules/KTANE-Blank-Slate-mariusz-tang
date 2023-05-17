@@ -15,7 +15,6 @@ public class CrackState : RuleStateController {
     private int _targetTime;
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
-        yield return null;
         _originalTexture = _moduleRenderer.material.GetTexture("_MainTex");
         _moduleRenderer.material.SetTexture("_MainTex", _crackTextures[pressedRegion.Number - 1]);
 
@@ -26,6 +25,7 @@ public class CrackState : RuleStateController {
         _targetRegionNumber = GetTargetRegionNumber(pressedRegion.Number);
         _targetTime = _module.BombInfo.GetSerialNumberNumbers().First();
         _module.Log($"Press region {_targetRegionNumber} when the last digit of the timer is {_targetTime}.");
+        yield return null;
     }
 
     private int GetTargetRegionNumber(int originRegionNumber) {

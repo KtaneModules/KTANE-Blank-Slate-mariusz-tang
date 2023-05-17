@@ -12,10 +12,14 @@ public class PolygonsState : RuleStateController {
     [SerializeField] GameObject[] _thirdPair;
     [SerializeField] GameObject[] _fourthPair;
     [SerializeField] GameObject _highlight;
-    [SerializeField] KMSelectable _selectable;
 
+    private GameObject[][] _pairs;
     private Dictionary<char, int> _colourParities;
-    private KMHighlightable _originalHighlight;
+    private Action _highlightShape;
+    private Action _unhighlightShape;
+
+    private Region _originRegion;
+    private int _targetRegionNumber;
 
     public bool CanPickEven { get; private set; }
     public bool CanPickOdd { get; private set; }
@@ -23,10 +27,11 @@ public class PolygonsState : RuleStateController {
     private void Start() {
         SetColourParities();
 
-        _selectable.OnHighlight += delegate () { _highlight.GetComponent<MeshRenderer>().enabled = true; };
-        _selectable.OnHighlightEnded += delegate () { _highlight.GetComponent<MeshRenderer>().enabled = false; };
-        _module.GetComponent<KMSelectable>().Children[8] = _selectable;
-        _module.GetComponent<KMSelectable>().UpdateChildrenProperly();
+        _pairs = new GameObject[][] { _firstPair, _secondPair, _thirdPair, _fourthPair };
+
+        var highlightRenderer = _highlight.GetComponent<MeshRenderer>();
+        _highlightShape = delegate () { highlightRenderer.enabled = true; };
+        _unhighlightShape = delegate () { highlightRenderer.enabled = false; };
     }
 
     private void SetColourParities() {
@@ -46,16 +51,48 @@ public class PolygonsState : RuleStateController {
     }
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
-        yield return null;
-        _originalHighlight = pressedRegion.Selectable.Highlight;
-        transform.position = pressedRegion.transform.position;
+        _originRegion = pressedRegion;
 
-        _module.GetComponent<KMSelectable>().Children[8] = null;
-        _module.GetComponent<KMSelectable>().UpdateChildrenProperly();
-        _selectable.gameObject.SetActive(false);
+        if (!CanPickEven) {
+            _targetRegionNumber = _module.AvailableRegions.Where(r => r % 2 != 0).PickRandom();
+        }
+        else if (!CanPickOdd) {
+            _targetRegionNumber = _module.AvailableRegions.Where(r => r % 2 != 1).PickRandom();
+        }
+        else {
+            _targetRegionNumber = _module.AvailableRegions.PickRandom();
+        }
+
+        GameObject displayedShape = GetShapeForTargetRegion(_targetRegionNumber);
+        _highlight.GetComponent<MeshFilter>().mesh = displayedShape.GetComponentInChildren<MeshFilter>().sharedMesh;
+
+        _module.Log($"{displayedShape.name.Substring(2)} appeared on region {pressedRegion.Number}.");
+        _module.Log($"The corresponding region to press is {_targetRegionNumber}.");
+
+        transform.position = pressedRegion.transform.position;
+        _highlightShape();
+        _originRegion.Selectable.OnHighlight += _highlightShape;
+        _originRegion.Selectable.OnHighlightEnded += _unhighlightShape;
+        yield return null;
+    }
+
+    private GameObject GetShapeForTargetRegion(int targetRegion) {
+        // Return a shape which results in the required target region.
+        return _pairs[(targetRegion - 1) / 2].Where(s => _colourParities[s.name[0]] == targetRegion % 2).PickRandom();
     }
 
     public override IEnumerator HandleRegionPress(Region pressedRegion) {
-        throw new System.NotImplementedException();
+        int pressedPosition = pressedRegion.Number;
+
+        if (pressedPosition != _targetRegionNumber) {
+            _module.Strike($"Incorrectly pressed region {pressedPosition}. Strike!");
+        }
+        else {
+            _originRegion.Selectable.OnHighlight -= _highlightShape;
+            _originRegion.Selectable.OnHighlightEnded -= _unhighlightShape;
+            // ! _module.GetNewState(pressedRegion);
+            _module.Log("Correct!");
+        }
+        yield return null;
     }
 }

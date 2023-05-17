@@ -26,7 +26,6 @@ public class TapCodeState : RuleStateController {
     private Coroutine _playingTapCode;
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
-        yield return null;
         _originRegionNumber = pressedRegion.Number;
         _module.Log($"Region {_originRegionNumber} is playing tap code.");
         _targetRegionNumber = _module.AvailableRegions.PickRandom();
@@ -35,10 +34,11 @@ public class TapCodeState : RuleStateController {
         _tappedWord = _words[forwardDistance - 1].PickRandom();
 
         _module.Log($"The word being transmitted is {_tappedWord}.");
-        _module.Log($"The corresponding region is press is {_targetRegionNumber}.");
+        _module.Log($"The corresponding region to press is {_targetRegionNumber}.");
 
         transform.position = pressedRegion.transform.position;
         _playingTapCode = StartCoroutine(PlayTapCode());
+        yield return null;
     }
 
     public override IEnumerator HandleRegionPress(Region pressedRegion) {

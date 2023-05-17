@@ -76,7 +76,6 @@ public class BrailleState : RuleStateController {
     private Coroutine _flashingSequence;
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
-        yield return null;
         _originRegionNumber = pressedRegion.Number;
         _module.Log($"Region {_originRegionNumber} is cycling braille.");
 
@@ -87,10 +86,11 @@ public class BrailleState : RuleStateController {
         _flashingDots = GetFlashingDots(_flashingWordSplit);
 
         _module.Log($"The cycled word is \"{CombineWord(_flashingWordSplit)}\".");
-        _module.Log($"The corresponding region is press is {_targetRegionNumber}.");
+        _module.Log($"The corresponding region to press is {_targetRegionNumber}.");
 
         transform.position = pressedRegion.transform.position;
         _flashingSequence = StartCoroutine(FlashSequence());
+        yield return null;
     }
 
     public override IEnumerator HandleRegionPress(Region pressedRegion) {

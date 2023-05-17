@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class BlankSlatesModule : MonoBehaviour {
 
-    // ! Need to check for the case where all the colour values for Polygons rule share parity,
-    // ! in which case change the way polygons is selected.
     // ! Punctuation Marks rule must not be last, to allow for the solution colour to move with the rest.
     // ! If Punctuation Marks is second-to-last and polygons requires a specific parity, then pick Punctuation Marks but
     // ! force it to pick the other parity.
@@ -44,10 +42,13 @@ public class BlankSlatesModule : MonoBehaviour {
         foreach (Region region in _regions) {
             region.Selectable.OnInteract += delegate () { HandleRegionPress(region); return false; };
         }
+
+        Log("Press any region to start.");
     }
 
     private void HandleRegionPress(Region pressedRegion) {
         if (_currentRuleState == null) {
+            Log($"Pressed region {pressedRegion.Number}.");
             AvailableRegions.Remove(pressedRegion.Number);
             GetNewState(pressedRegion);
             return;
@@ -58,6 +59,7 @@ public class BlankSlatesModule : MonoBehaviour {
     public void GetNewState(Region pressedRegion) {
         int stateIndex = _availableRuleStates.PickRandom();
 
+        // Handle the possibility of polygons not being able to select an available region.
         if (!_polygons.CanPickEven && AvailableRegions.Count(r => r % 2 != 0) == 1) {
             stateIndex = 0;
         }
