@@ -48,7 +48,7 @@ public class TapCodeState : RuleStateController {
 
         if (pressedPosition != _originRegionNumber) {
             if (pressedPosition == _targetRegionNumber) {
-                _module.BombAudio.PlaySoundAtTransform("TapCode MiniTap", transform);
+                _module.Log("Pressed the correct region!");
                 // ! _module.GetNewState(pressedRegion);
                 _module.Log("Correct!");
             }

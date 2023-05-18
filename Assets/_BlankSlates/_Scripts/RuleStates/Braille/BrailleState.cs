@@ -100,6 +100,7 @@ public class BrailleState : RuleStateController {
 
         if (pressedPosition != _originRegionNumber) {
             if (pressedPosition == _targetRegionNumber) {
+                _module.Log("Pressed the correct region!");
                 // ! _module.GetNewState(pressedRegion);
                 _module.Log("Correct!");
             }

@@ -90,6 +90,7 @@ public class PolygonsState : RuleStateController {
         else {
             _originRegion.Selectable.OnHighlight -= _highlightShape;
             _originRegion.Selectable.OnHighlightEnded -= _unhighlightShape;
+            _module.Log("Pressed the correct region!");
             // ! _module.GetNewState(pressedRegion);
             _module.Log("Correct!");
         }

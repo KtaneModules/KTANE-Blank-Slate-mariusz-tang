@@ -132,7 +132,6 @@ public class PunctuationMarksState : RuleStateController {
 
         if (buttonNumber == _currentTargetPosition) {
             _module.Log("Pressed the correct colour!");
-            _module.BombAudio.PlaySoundAtTransform("PM solve", transform);
             // ! _module.GetNewState(_module.Regions[buttonNumber - 1]);
             _module.Log("Correct!");
         }
