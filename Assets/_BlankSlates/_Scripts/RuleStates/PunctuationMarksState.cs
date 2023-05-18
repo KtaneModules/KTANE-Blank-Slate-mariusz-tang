@@ -59,7 +59,7 @@ public class PunctuationMarksState : RuleStateController {
         _movingPart.localScale = _movingPartScaleSmall;
         _module.BombAudio.PlaySoundAtTransform("PM Begin", transform);
 
-        _module.Log($"Region {_originRegionNumber} emitted a high-pitched sound!");
+        _module.Log($"Region {_originRegionNumber} emitted a high-pitched sound.");
         _module.Log($"Press this region again to reveal the number.");
 
         yield return null;
