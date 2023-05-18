@@ -48,6 +48,7 @@ public class TapCodeState : RuleStateController {
 
         if (pressedPosition != _originRegionNumber) {
             if (pressedPosition == _targetRegionNumber) {
+                _module.BombAudio.PlaySoundAtTransform("TapCode MiniTap", transform);
                 // ! _module.GetNewState(pressedRegion);
                 _module.Log("Correct!");
             }
@@ -69,13 +70,13 @@ public class TapCodeState : RuleStateController {
             int column = position % 5 + 1;
 
             for (int i = 0; i < row; i++) {
-                _module.BombAudio.PlaySoundAtTransform("Tap", transform);
+                _module.BombAudio.PlaySoundAtTransform("TapCode Tap", transform);
                 yield return new WaitForSeconds(0.5f);
             }
             yield return new WaitForSeconds(0.5f);
 
             for (int i = 0; i < column; i++) {
-                _module.BombAudio.PlaySoundAtTransform("Tap", transform);
+                _module.BombAudio.PlaySoundAtTransform("TapCode Tap", transform);
                 yield return new WaitForSeconds(0.5f);
             }
             yield return new WaitForSeconds(0.5f);
