@@ -23,10 +23,13 @@ public class BlankSlatesModule : MonoBehaviour {
     private List<int> _availableRuleStates;
     private RuleStateController _currentRuleState;
 
+    private bool TwitchPlaysActive;
+
     public List<int> AvailableRegions { get; private set; }
     public Region[] Regions { get { return _regions.ToArray(); } }
     public KMBombInfo BombInfo { get; private set; }
     public KMAudio BombAudio { get; private set; }
+    public bool TpActive { get { return TwitchPlaysActive; } }
 
     private void Awake() {
         _moduleId = _moduleCounter++;
