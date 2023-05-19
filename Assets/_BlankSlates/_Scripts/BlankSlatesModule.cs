@@ -22,6 +22,8 @@ public class BlankSlatesModule : MonoBehaviour {
 
     private List<int> _availableRuleStates;
     private RuleStateController _currentRuleState;
+    private int _initiallyPressedRegion;
+    private bool _hasReaddedInitialRegion = false;
 
     private bool TwitchPlaysActive;
 
@@ -34,8 +36,7 @@ public class BlankSlatesModule : MonoBehaviour {
     private void Awake() {
         _moduleId = _moduleCounter++;
         _module = GetComponent<KMBombModule>();
-        // _availableRuleStates = Enumerable.Range(0, _rulesStatesMinusPolygons.Count() + 1).ToList();
-        _availableRuleStates = Enumerable.Range(1, 1).ToList();
+        _availableRuleStates = Enumerable.Range(0, _rulesStatesMinusPolygons.Count() + 1).ToList();
 
         BombInfo = GetComponent<KMBombInfo>();
         BombAudio = GetComponent<KMAudio>();
@@ -52,8 +53,8 @@ public class BlankSlatesModule : MonoBehaviour {
 
     private void HandleRegionPress(Region pressedRegion) {
         if (_currentRuleState == null) {
+            _initiallyPressedRegion = pressedRegion.Number;
             Log($"Pressed region {pressedRegion.Number}.");
-            AvailableRegions.Remove(pressedRegion.Number);
             GetNewState(pressedRegion);
             return;
         }
@@ -61,14 +62,26 @@ public class BlankSlatesModule : MonoBehaviour {
     }
 
     public void GetNewState(Region pressedRegion) {
+        if (_availableRuleStates.Count() == 0) {
+            _module.HandlePass();
+            return;
+        }
+
+        if (!_hasReaddedInitialRegion && !AvailableRegions.Contains(_initiallyPressedRegion)) {
+            AvailableRegions.Add(_initiallyPressedRegion);
+            _hasReaddedInitialRegion = true;
+        }
+        AvailableRegions.Remove(pressedRegion.Number);
         int stateIndex = _availableRuleStates.PickRandom();
 
-        // Handle the possibility of polygons not being able to select an available region.
-        if (!_polygons.CanPickEven && AvailableRegions.Count(r => r % 2 != 0) == 1) {
-            stateIndex = 0;
-        }
-        else if (!_polygons.CanPickOdd && AvailableRegions.Count(r => r % 2 != 1) == 1) {
-            stateIndex = 0;
+        if (_availableRuleStates.Contains(0)) {
+            // Handle the possibility of polygons not being able to select an available region.
+            if (!_polygons.CanPickEven && AvailableRegions.Count(r => r % 2 != 0) == 1) {
+                stateIndex = 0;
+            }
+            else if (!_polygons.CanPickOdd && AvailableRegions.Count(r => r % 2 != 1) == 1) {
+                stateIndex = 0;
+            }
         }
 
         if (stateIndex == 0) {
@@ -79,7 +92,6 @@ public class BlankSlatesModule : MonoBehaviour {
         }
 
         _availableRuleStates.Remove(stateIndex);
-        AvailableRegions.Remove(pressedRegion.Number);
 
         Log("-=-=-=-=-=-");
         StartCoroutine(_currentRuleState.OnStateEnter(pressedRegion));

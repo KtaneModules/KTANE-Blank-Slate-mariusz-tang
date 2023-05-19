@@ -70,7 +70,6 @@ public class PolygonsState : RuleStateController {
         _module.Log($"The corresponding region to press is {_targetRegionNumber}.");
 
         transform.position = pressedRegion.transform.position;
-        _highlightShape();
         _originRegion.Selectable.OnHighlight += _highlightShape;
         _originRegion.Selectable.OnHighlightEnded += _unhighlightShape;
         yield return null;
@@ -91,8 +90,7 @@ public class PolygonsState : RuleStateController {
             _originRegion.Selectable.OnHighlight -= _highlightShape;
             _originRegion.Selectable.OnHighlightEnded -= _unhighlightShape;
             _module.Log("Pressed the correct region!");
-            // ! _module.GetNewState(pressedRegion);
-            _module.Log("Correct!");
+            _module.GetNewState(pressedRegion);
         }
         yield return null;
     }

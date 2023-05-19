@@ -101,8 +101,7 @@ public class BrailleState : RuleStateController {
         if (pressedPosition != _originRegionNumber) {
             if (pressedPosition == _targetRegionNumber) {
                 _module.Log("Pressed the correct region!");
-                // ! _module.GetNewState(pressedRegion);
-                _module.Log("Correct!");
+                _module.GetNewState(pressedRegion);
             }
             else {
                 _module.Strike($"Incorrectly pressed region {pressedPosition}. Strike!");
@@ -172,7 +171,7 @@ public class BrailleState : RuleStateController {
         }
 
         // Convert from indivial reading order to individual braille order.
-        List<int> invertedPositionsBraille = invertedPositionsReading.Select(p => p - p % 6 + (p % 6) / 2 + (p % 2 == 0 ? 3 : 1)).ToList();
+        List<int> invertedPositionsBraille = invertedPositionsReading.Select(p => p - (p % 6 == 0 ? 6 : p % 6) + (p % 6 == 0 ? 6 : p % 6) / 2 + (p % 2 == 0 ? 3 : 1)).ToList();
         return invertedPositionsBraille;
     }
 

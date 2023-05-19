@@ -67,8 +67,7 @@ public class HipsState : RuleStateController {
             StopCoroutine(_highlightsActive);
             StartCoroutine(FadeOutNumbers());
             _module.Log("Pressed the correct region!");
-            // ! _module.GetNewState(pressedRegion);
-            _module.Log("Correct!");
+            _module.GetNewState(pressedRegion);
         }
         else {
             _module.Strike($"Incorrectly pressed region {pressedNumber}. Strike!");

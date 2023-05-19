@@ -70,7 +70,7 @@ public class HingesState : RuleStateController {
     private IEnumerator KillHinge(Hinge theHingeInQuestion) {
         _module.BombAudio.PlaySoundAtTransform("Hinge Rip", theHingeInQuestion.transform);
         yield return new WaitForSeconds(0.85f);
-        Destroy(theHingeInQuestion.gameObject);
+        theHingeInQuestion.gameObject.SetActive(false);
     }
 
     public override IEnumerator HandleRegionPress(Region pressedRegion) {
@@ -79,8 +79,7 @@ public class HingesState : RuleStateController {
         if (pressedNumber == _targetRegionNumber) {
             _module.Log("Pressed the correct region!");
             Array.ForEach(_hinges, h => h.SetSelectableActive(false));
-            // ! _module.GetNewState(pressedRegion);
-            _module.Log("Correct!");
+            _module.GetNewState(pressedRegion);
         }
         else {
             _module.Strike($"Incorrectly pressed region {pressedNumber}. Strike!");

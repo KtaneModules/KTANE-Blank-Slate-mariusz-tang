@@ -67,8 +67,7 @@ public class CrackState : RuleStateController {
             _moduleRenderer.material.SetTexture("_MainTex", _originalTexture);
             yield return new WaitForSeconds(0.5f);
             _module.Log("Pressed the correct region at the right time!");
-            // ! _module.GetNewState(pressedRegion);
-            _module.Log("Correct!");
+            _module.GetNewState(pressedRegion);
         }
     }
 

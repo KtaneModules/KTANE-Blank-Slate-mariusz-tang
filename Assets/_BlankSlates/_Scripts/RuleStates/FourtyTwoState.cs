@@ -70,8 +70,7 @@ public class FourtyTwoState : RuleStateController {
             StopCoroutine(_cycling);
             Array.ForEach(_textMeshes, t => t.text = string.Empty);
             _module.Log("Pressed the correct region!");
-            // ! _module.GetNewState(pressedRegion);
-            _module.Log("Correct!");
+            _module.GetNewState(pressedRegion);
         }
         else {
             _module.Strike($"Incorrectly pressed region {pressedNumber}. Strike!");
