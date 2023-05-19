@@ -10,11 +10,13 @@ public class FourtyTwoState : RuleStateController {
     [SerializeField] private Color[] _colours;
     [SerializeField] private TextMesh[] _textMeshes;
 
+    private int _originRegionNumber;
     private int _targetRegionNumber;
     private int[][] _numberSequences;
     private Coroutine _cycling;
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
+        _originRegionNumber = pressedRegion.Number;
         _targetRegionNumber = _module.AvailableRegions.PickRandom();
         _numberSequences = GenerateNumberSequences(_targetRegionNumber);
         _cycling = StartCoroutine(CycleNumbers());
@@ -50,8 +52,10 @@ public class FourtyTwoState : RuleStateController {
         int j = 0;
         while (true) {
             for (int i = 0; i < 8; i++) {
-                _textMeshes[i].text = $"{_numberSequences[i][j]:00}";
-                _textMeshes[i].color = _colours.PickRandom();
+                if (i + 1 != _originRegionNumber) {
+                    _textMeshes[i].text = $"{_numberSequences[i][j]:00}";
+                    _textMeshes[i].color = _colours.PickRandom();
+                }
             }
             yield return new WaitForSeconds(1);
             j++;
