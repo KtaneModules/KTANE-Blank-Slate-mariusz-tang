@@ -258,6 +258,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: _solveTextures.Array.size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4079886019656916, guid: ec41aaf716553f541a76242b0828a954, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -290,6 +295,51 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 23402635302339192, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 26cdee844cb231740941635a5e5962c7, type: 2}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: _solveTextures.Array.data[0]
+      value: 
+      objectReference: {fileID: 2800000, guid: 8bd994405d6cab84482f296bf8d9cf9e, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: _solveTextures.Array.data[1]
+      value: 
+      objectReference: {fileID: 2800000, guid: a3551f561a20e5b4cb0ca157d8231671, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: _solveTextures.Array.data[2]
+      value: 
+      objectReference: {fileID: 2800000, guid: 406709912b3e1df4aa0ec5dc64d0ae5d, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: _solveTextures.Array.data[3]
+      value: 
+      objectReference: {fileID: 2800000, guid: d10ccff3b4195334aa7b6ee0bbc42674, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: _solveTextures.Array.data[4]
+      value: 
+      objectReference: {fileID: 2800000, guid: 15257b823d517e8408b483986b36775c, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: _solveTextures.Array.data[5]
+      value: 
+      objectReference: {fileID: 2800000, guid: 6ac5594115a91d442be46fb00d3779db, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: _solveTextures.Array.data[6]
+      value: 
+      objectReference: {fileID: 2800000, guid: 876ac1c572f1b0343867ca9d1fb1c388, type: 3}
+    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
+        type: 2}
+      propertyPath: _solveTextures.Array.data[7]
+      value: 
+      objectReference: {fileID: 2800000, guid: e63426441b25b7d4e9aa1d7270d9e7f3, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec41aaf716553f541a76242b0828a954, type: 2}
   m_IsPrefabParent: 0

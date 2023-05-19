@@ -9,6 +9,7 @@ public class CrackState : RuleStateController {
 
     [SerializeField] private MeshRenderer _moduleRenderer;
     [SerializeField] private Texture[] _crackTextures;
+    [SerializeField] private Texture[] _solveTextures;
 
     private Texture _originalTexture;
     private int _targetRegionNumber;
