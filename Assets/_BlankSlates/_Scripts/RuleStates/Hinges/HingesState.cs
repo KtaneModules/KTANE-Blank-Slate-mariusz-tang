@@ -99,13 +99,15 @@ public class HingesState : RuleStateController {
             yield return StartCoroutine(KillHinge(_hinges[nextOneToDie]));
         }
 
+        // This part is very much yeeted straight out of hinges.
         float x = _module.transform.position.x + Rnd.Range(-1f, 1f);
         float y = _module.transform.position.y + Rnd.Range(-1f, 1f);
         float z = _module.transform.position.z + Rnd.Range(-1f, 1f);
         var randomNumbers = new int[] { -9, -7, -5, 5, 7, 9 };
 
         yield return StartCoroutine(base.SolveAnimation());
-        _moduleRigidBody.isKinematic = false;
+        // This needs to be done because apparently unity does NOT like the TP overlay on non-kinematic rigidbodies.
+        _moduleRigidBody.isKinematic = false; 
         _moduleRigidBody.AddForceAtPosition(new Vector3(randomNumbers.PickRandom(), randomNumbers.PickRandom(), randomNumbers.PickRandom()), new Vector3(x, y, z));
 
         yield return new WaitForSeconds(10);
