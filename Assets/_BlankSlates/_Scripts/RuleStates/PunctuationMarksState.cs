@@ -161,4 +161,9 @@ public class PunctuationMarksState : RuleStateController {
         Array.ForEach(_logicDiveButtons, b => b.transform.localScale = value ? _logicDiveButtonScale : Vector3.zero);
         Array.ForEach(_module.Regions, r => r.transform.localScale = value ? Vector3.zero : Vector3.one);
     }
+
+    public override IEnumerator SolveAnimation() {
+        _module.BombAudio.PlaySoundAtTransform("PM solve", transform);
+        return base.SolveAnimation();
+    }
 }

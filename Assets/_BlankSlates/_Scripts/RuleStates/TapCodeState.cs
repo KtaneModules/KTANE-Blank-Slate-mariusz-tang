@@ -87,4 +87,9 @@ public class TapCodeState : RuleStateController {
             StopCoroutine(_playingTapCode);
         }
     }
+
+    public override IEnumerator SolveAnimation() {
+        _module.BombAudio.PlaySoundAtTransform("TapCode MiniTap", transform);
+        return base.SolveAnimation();
+    }
 }

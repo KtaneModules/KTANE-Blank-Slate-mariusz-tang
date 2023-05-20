@@ -155,7 +155,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 439642, guid: 8814ea52310d2614a9feda02ec355ae4, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114848120511536268, guid: 8814ea52310d2614a9feda02ec355ae4,
         type: 2}
@@ -246,23 +246,17 @@ Prefab:
         type: 2}
       propertyPath: EdgeworkConfiguration
       value: 
-      objectReference: {fileID: 11400000, guid: c641442a1d7021b4e9e430038b1820aa,
-        type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8814ea52310d2614a9feda02ec355ae4, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &1375055303
+--- !u!1001 &1305293227
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _solveTextures.Array.size
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 4079886019656916, guid: ec41aaf716553f541a76242b0828a954, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -293,56 +287,39 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4079886019656916, guid: ec41aaf716553f541a76242b0828a954, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 23402635302339192, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 26cdee844cb231740941635a5e5962c7, type: 2}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _solveTextures.Array.data[0]
-      value: 
-      objectReference: {fileID: 2800000, guid: 8bd994405d6cab84482f296bf8d9cf9e, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _solveTextures.Array.data[1]
-      value: 
-      objectReference: {fileID: 2800000, guid: a3551f561a20e5b4cb0ca157d8231671, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _solveTextures.Array.data[2]
-      value: 
-      objectReference: {fileID: 2800000, guid: 406709912b3e1df4aa0ec5dc64d0ae5d, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _solveTextures.Array.data[3]
-      value: 
-      objectReference: {fileID: 2800000, guid: d10ccff3b4195334aa7b6ee0bbc42674, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _solveTextures.Array.data[4]
-      value: 
-      objectReference: {fileID: 2800000, guid: 15257b823d517e8408b483986b36775c, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _solveTextures.Array.data[5]
-      value: 
-      objectReference: {fileID: 2800000, guid: 6ac5594115a91d442be46fb00d3779db, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _solveTextures.Array.data[6]
-      value: 
-      objectReference: {fileID: 2800000, guid: 876ac1c572f1b0343867ca9d1fb1c388, type: 3}
-    - target: {fileID: 114577326564179234, guid: ec41aaf716553f541a76242b0828a954,
-        type: 2}
-      propertyPath: _solveTextures.Array.data[7]
-      value: 
-      objectReference: {fileID: 2800000, guid: e63426441b25b7d4e9aa1d7270d9e7f3, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec41aaf716553f541a76242b0828a954, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1380442092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100006, guid: 5bbd0393c35d87349a728dc65df7ad61, type: 3}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1380442093}
+  m_Layer: 0
+  m_Name: Component_PuzzleBackground_Modified
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1380442093
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400006, guid: 5bbd0393c35d87349a728dc65df7ad61, type: 3}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1380442092}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1793295349
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +399,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1978850120
 GameObject:
@@ -487,5 +464,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}

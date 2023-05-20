@@ -7,6 +7,8 @@ using Rnd = UnityEngine.Random;
 
 public class FourtyTwoState : RuleStateController {
 
+    private readonly Vector3 _textSize = Vector3.one * 0.4f;
+
     [SerializeField] private Color[] _colours;
     [SerializeField] private TextMesh[] _textMeshes;
 
@@ -68,7 +70,9 @@ public class FourtyTwoState : RuleStateController {
 
         if (pressedNumber == _targetRegionNumber) {
             StopCoroutine(_cycling);
-            Array.ForEach(_textMeshes, t => t.text = string.Empty);
+            if (!_module.ReadyToSolve) {
+                Array.ForEach(_textMeshes, t => t.text = string.Empty);
+            }
             _module.Log("Pressed the correct region!");
             _module.GetNewState(pressedRegion);
         }
@@ -77,6 +81,19 @@ public class FourtyTwoState : RuleStateController {
         }
 
         yield return null;
+    }
+
+    public override IEnumerator SolveAnimation() {
+        float elapsedTime = 0;
+
+        yield return StartCoroutine(base.SolveAnimation());
+
+        _module.BombAudio.PlaySoundAtTransform("42 Tick", transform);
+        while (elapsedTime <= 1) {
+            elapsedTime += Time.deltaTime;
+            Array.ForEach(_textMeshes, t => t.transform.localScale = _textSize * Mathf.Lerp(1, 0, elapsedTime));
+            yield return null;
+        }
     }
 
 }

@@ -19,10 +19,11 @@ public class HingesState : RuleStateController {
     };
 
     [SerializeField] private Hinge[] _hinges;
+    [SerializeField] private Rigidbody _moduleRigidBody;
 
     // This is referring to the hinge stored in the first element of _hinges.
     private int _valueOfFirstHinge;
-
+    private int _hingeToKill;
     private int _lowHinge;
     private int _highHinge;
     private int _targetRegionNumber;
@@ -33,19 +34,19 @@ public class HingesState : RuleStateController {
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
         Array.ForEach(_hinges, h => h.SetSelectableActive(true));
-        int hingeToKill = Rnd.Range(0, 8);
+        _hingeToKill = Rnd.Range(0, 8);
 
-        _valueOfFirstHinge = pressedRegion.Number - hingeToKill;
+        _valueOfFirstHinge = pressedRegion.Number - _hingeToKill;
         if (_valueOfFirstHinge < 1) {
             _valueOfFirstHinge += 8;
         }
 
         _targetRegionNumber = _module.AvailableRegions.PickRandom();
-        _highHinge = Enumerable.Range(0, 8).Where(i => _valueTable[i, hingeToKill] != _targetRegionNumber && _valueTable[i, i] != _targetRegionNumber).PickRandom() + 1;
+        _highHinge = Enumerable.Range(0, 8).Where(i => _valueTable[i, _hingeToKill] != _targetRegionNumber && _valueTable[i, i] != _targetRegionNumber).PickRandom() + 1;
         _lowHinge = Enumerable.Range(0, 8).First(i => _valueTable[_highHinge - 1, i] == _targetRegionNumber) + 1;
         Array.ForEach(_hinges, h => h.Selectable.OnInteract += delegate () { HandleHingePress(h); return false; });
 
-        yield return StartCoroutine(KillHinge(_hinges[hingeToKill]));
+        yield return StartCoroutine(KillHinge(_hinges[_hingeToKill]));
 
         _module.Log($"Pressing region {pressedRegion.Number} caused a hinge to fall off.");
         _module.Log($"Hinge {_lowHinge} plays a lower-pitch sound.");
@@ -86,6 +87,29 @@ public class HingesState : RuleStateController {
         }
 
         yield return null;
+    }
+
+    public override IEnumerator SolveAnimation() {
+        List<int> remainingHinges = Enumerable.Range(0, 8).ToList();
+        remainingHinges.Remove(_hingeToKill);
+
+        while (remainingHinges.Count() != 0) {
+            int nextOneToDie = remainingHinges.PickRandom();
+            remainingHinges.Remove(nextOneToDie);
+            yield return StartCoroutine(KillHinge(_hinges[nextOneToDie]));
+        }
+
+        float x = _module.transform.position.x + Rnd.Range(-1f, 1f);
+        float y = _module.transform.position.y + Rnd.Range(-1f, 1f);
+        float z = _module.transform.position.z + Rnd.Range(-1f, 1f);
+        var randomNumbers = new int[] { -9, -7, -5, 5, 7, 9 };
+
+        yield return StartCoroutine(base.SolveAnimation());
+        _moduleRigidBody.isKinematic = false;
+        _moduleRigidBody.AddForceAtPosition(new Vector3(randomNumbers.PickRandom(), randomNumbers.PickRandom(), randomNumbers.PickRandom()), new Vector3(x, y, z));
+
+        yield return new WaitForSeconds(10);
+        _moduleRigidBody.gameObject.SetActive(false);
     }
 
 }

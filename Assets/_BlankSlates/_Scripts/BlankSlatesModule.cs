@@ -6,13 +6,11 @@ using UnityEngine;
 
 public class BlankSlatesModule : MonoBehaviour {
 
-    // ! Punctuation Marks rule must not be last, to allow for the solution colour to move with the rest.
-    // ! If Punctuation Marks is second-to-last and polygons requires a specific parity, then pick Punctuation Marks but
-    // ! force it to pick the other parity.
     private KMBombModule _module;
 
     private static int _moduleCounter = 0;
     private int _moduleId;
+    private bool _isSolved = false;
 
     [SerializeField] private Region[] _regions;
     // Polygons is special in that in rare cases it is unable to pick an odd region or an even region.
@@ -32,11 +30,13 @@ public class BlankSlatesModule : MonoBehaviour {
     public KMBombInfo BombInfo { get; private set; }
     public KMAudio BombAudio { get; private set; }
     public bool TpActive { get { return TwitchPlaysActive; } }
+    public bool ReadyToSolve { get; private set; }
 
     private void Awake() {
         _moduleId = _moduleCounter++;
         _module = GetComponent<KMBombModule>();
-        _availableRuleStates = Enumerable.Range(0, _rulesStatesMinusPolygons.Count() + 1).ToList();
+        // _availableRuleStates = Enumerable.Range(0, _rulesStatesMinusPolygons.Count() + 1).ToList();
+        _availableRuleStates = new List<int> { 1 };
 
         BombInfo = GetComponent<KMBombInfo>();
         BombAudio = GetComponent<KMAudio>();
@@ -52,6 +52,10 @@ public class BlankSlatesModule : MonoBehaviour {
     }
 
     private void HandleRegionPress(Region pressedRegion) {
+        if (_isSolved) {
+            return;
+        }
+
         if (_currentRuleState == null) {
             _initiallyPressedRegion = pressedRegion.Number;
             Log($"Pressed region {pressedRegion.Number}.");
@@ -62,9 +66,14 @@ public class BlankSlatesModule : MonoBehaviour {
     }
 
     public void GetNewState(Region pressedRegion) {
-        if (_availableRuleStates.Count() == 0) {
-            _module.HandlePass();
+        int statesLeft = _availableRuleStates.Count();
+        if (statesLeft == 0) {
+            StartCoroutine(_currentRuleState.SolveAnimation());
             return;
+        }
+
+        if (statesLeft == 1) {
+            ReadyToSolve = true;
         }
 
         if (!_hasReaddedInitialRegion && !AvailableRegions.Contains(_initiallyPressedRegion)) {
@@ -104,5 +113,12 @@ public class BlankSlatesModule : MonoBehaviour {
     public void Strike(string message) {
         Log($"✕ {message}");
         _module.HandleStrike();
+    }
+
+    public void Solve() {
+        Log("-=-=-=-=-=-");
+        Log("Solved!");
+        _isSolved = true;
+        _module.HandlePass();
     }
 }

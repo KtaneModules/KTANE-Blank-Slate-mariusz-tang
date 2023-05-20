@@ -12,18 +12,20 @@ public class CrackState : RuleStateController {
     [SerializeField] private Texture[] _solveTextures;
 
     private Texture _originalTexture;
+    private int _originRegionNumber;
     private int _targetRegionNumber;
     private int _targetTime;
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
+        _originRegionNumber = pressedRegion.Number;
         _originalTexture = _moduleRenderer.material.GetTexture("_MainTex");
-        _moduleRenderer.material.SetTexture("_MainTex", _crackTextures[pressedRegion.Number - 1]);
+        _moduleRenderer.material.SetTexture("_MainTex", _crackTextures[_originRegionNumber - 1]);
 
         transform.position = pressedRegion.transform.position;
         _module.BombAudio.PlaySoundAtTransform("Crack Forward", transform);
 
-        _module.Log($"The module cracked around region {pressedRegion.Number}.");
-        _targetRegionNumber = GetTargetRegionNumber(pressedRegion.Number);
+        _module.Log($"The module cracked around region {_originRegionNumber}.");
+        _targetRegionNumber = GetTargetRegionNumber(_originRegionNumber);
         _targetTime = _module.BombInfo.GetSerialNumberNumbers().First();
         _module.Log($"Press region {_targetRegionNumber} when the last digit of the timer is {_targetTime}.");
         yield return null;
@@ -63,13 +65,20 @@ public class CrackState : RuleStateController {
             _module.Strike($"Pressed the correct region when the last digit was {pressedTime}. Strike!");
         }
         else {
-            _module.BombAudio.PlaySoundAtTransform("Crack Backward", transform);
-            yield return new WaitForSeconds(1);
-            _moduleRenderer.material.SetTexture("_MainTex", _originalTexture);
-            yield return new WaitForSeconds(0.5f);
+            if (!_module.ReadyToSolve) {
+                _module.BombAudio.PlaySoundAtTransform("Crack Backward", transform);
+                yield return new WaitForSeconds(1);
+                _moduleRenderer.material.SetTexture("_MainTex", _originalTexture);
+            }
             _module.Log("Pressed the correct region at the right time!");
             _module.GetNewState(pressedRegion);
         }
     }
 
+    public override IEnumerator SolveAnimation() {
+        _module.BombAudio.PlaySoundAtTransform("Crack Forward", transform);
+        _moduleRenderer.material.SetTexture("_MainTex", _solveTextures[_originRegionNumber - 1]);
+        yield return new WaitForSeconds(2);
+        yield return StartCoroutine(base.SolveAnimation());
+    }
 }
