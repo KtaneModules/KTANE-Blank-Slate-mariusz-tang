@@ -35,8 +35,8 @@ public class BlankSlatesModule : MonoBehaviour {
     private void Awake() {
         _moduleId = _moduleCounter++;
         _module = GetComponent<KMBombModule>();
-        // _availableRuleStates = Enumerable.Range(0, _rulesStatesMinusPolygons.Count() + 1).ToList();
-        _availableRuleStates = new List<int> { 1 };
+        _availableRuleStates = Enumerable.Range(0, _rulesStatesMinusPolygons.Count() + 1).ToList();
+        // ! _availableRuleStates = new List<int> { 1 };
 
         BombInfo = GetComponent<KMBombInfo>();
         BombAudio = GetComponent<KMAudio>();

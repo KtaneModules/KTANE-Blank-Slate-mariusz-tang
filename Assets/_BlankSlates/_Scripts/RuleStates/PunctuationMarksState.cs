@@ -8,6 +8,8 @@ using Rnd = UnityEngine.Random;
 public class PunctuationMarksState : RuleStateController {
 
     private const string COLOUR_ORDER = "ROYGBPKW";
+    private const string CB_COLOUR_ORDER = "roygbp  ";
+    private readonly Vector3 _cbButtonScale = new Vector3(0.02748407f, 0.002005622f, 0.02748407f);
     private readonly Vector3 _logicDiveButtonScale = new Vector3(0.0002f, 0.00007f, 0.0002f);
     private readonly Vector3 _movingPartScaleSmall = new Vector3(1 / 3f, 1, 1 / 3f);
     private readonly Vector3 _movingPartScaleBig = Vector3.one;
@@ -28,6 +30,10 @@ public class PunctuationMarksState : RuleStateController {
     [SerializeField] private SpriteRenderer[] _glitchSquares;
     [SerializeField] private TextMesh _digitText;
 
+    [SerializeField] private KMSelectable _cbButton;
+    [SerializeField] private TextMesh[] _cbTexts;
+    [SerializeField] private TextMesh _cbInfoText;
+
     [SerializeField] private KMSelectable[] _logicDiveButtons;
     [SerializeField] private Color[] _logicDiveColours;
 
@@ -35,6 +41,9 @@ public class PunctuationMarksState : RuleStateController {
     private int _displayDigit;
     private bool _hasRevealedDigit = false;
     private bool _hasLoggedDigit = false;
+
+    private Coroutine _displayCbModeInfo;
+    private bool _cbModeEnabled = false;
 
     private int _targetColourIndex;
     private Color _targetColour;
@@ -49,11 +58,32 @@ public class PunctuationMarksState : RuleStateController {
             int buttonNumber = i + 1;
             _logicDiveButtons[i].OnInteract += delegate () { StartCoroutine(HandleButtonPress(buttonNumber)); return false; };
         }
+
+        _cbButton.transform.localScale = Vector3.zero;
+        _cbButton.OnInteract += delegate () { ToggleCbMode(); return false; };
+    }
+
+    private void ToggleCbMode() {
+        _cbModeEnabled = !_cbModeEnabled;
+        Array.ForEach(_cbTexts, t => t.color = _cbModeEnabled ? Color.black : Color.black * 0);
+
+        if (_displayCbModeInfo != null) {
+            StopCoroutine(_displayCbModeInfo);
+        }
+        _displayCbModeInfo = StartCoroutine(DisplayCbModeInfo());
+    }
+
+    private IEnumerator DisplayCbModeInfo() {
+        _cbInfoText.text = _cbModeEnabled ? "cb:on" : "cb:off";
+        yield return new WaitForSeconds(1);
+        _cbInfoText.text = string.Empty;
     }
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
         _originRegionNumber = pressedRegion.Number;
         _displayDigit = Rnd.Range(1, 9);
+
+        _cbButton.transform.localScale = _cbButtonScale;
 
         _movingPart.position = pressedRegion.transform.position;
         _movingPart.localScale = _movingPartScaleSmall;
@@ -113,6 +143,7 @@ public class PunctuationMarksState : RuleStateController {
     private void SetColours() {
         _currentTargetPosition = _module.AvailableRegions.PickRandom();
         _logicDiveButtons[_currentTargetPosition - 1].GetComponent<MeshRenderer>().material.color = _targetColour;
+        _cbTexts[_currentTargetPosition - 1].text = CB_COLOUR_ORDER[_targetColourIndex].ToString();
 
         List<int> _availableColourIndices = Enumerable.Range(0, 8).ToList();
         _availableColourIndices.Remove(_targetColourIndex);
@@ -122,6 +153,7 @@ public class PunctuationMarksState : RuleStateController {
                 int index = _availableColourIndices.PickRandom();
                 _availableColourIndices.Remove(index);
                 _logicDiveButtons[i].GetComponent<MeshRenderer>().material.color = _logicDiveColours[index];
+                _cbTexts[i].text = CB_COLOUR_ORDER[index].ToString();
             }
         }
     }
@@ -131,6 +163,7 @@ public class PunctuationMarksState : RuleStateController {
         SetButtonsActive(false);
 
         if (buttonNumber == _currentTargetPosition) {
+            _cbButton.transform.localScale = Vector3.zero;
             _module.Log("Pressed the correct colour!");
             _module.GetNewState(_module.Regions[buttonNumber - 1]);
         }
@@ -160,10 +193,12 @@ public class PunctuationMarksState : RuleStateController {
     private void SetButtonsActive(bool value) {
         Array.ForEach(_logicDiveButtons, b => b.transform.localScale = value ? _logicDiveButtonScale : Vector3.zero);
         Array.ForEach(_module.Regions, r => r.transform.localScale = value ? Vector3.zero : Vector3.one);
+        Array.ForEach(_cbTexts, t => t.text = string.Empty);
     }
 
     public override IEnumerator SolveAnimation() {
         _module.BombAudio.PlaySoundAtTransform("PM solve", transform);
         return base.SolveAnimation();
     }
+
 }
