@@ -124,7 +124,7 @@ public class BlankSlatesModule : MonoBehaviour {
     }
 
 #pragma warning disable 414
-    private readonly string TwitchHelpMessage = @"Use '!{0} press <region> [at <digit>]' to press a region; regions are numbered 1-8 in reading order; " 
+    private readonly string TwitchHelpMessage = @"Use '!{0} press <region> [at <digit>]' to press a region; regions are numbered 1-8 in reading order; "
                                                 + "if a digit is specified, the region will be pressed when the last digit of the timer is that digit | "
                                                 + "'!{0} hover <region>' to hover over a region; chain regions to hover over with spaces. "
                                                 + "The following commands are section-specific: Section 5: '!{0} hinge <number>' to press a hinge; "
@@ -142,9 +142,14 @@ public class BlankSlatesModule : MonoBehaviour {
 
 
     private IEnumerator TwitchHandleForcedSolve() {
-        yield return null;
+        if (_currentRuleState == null) {
+            Regions[Random.Range(0, 8)].Selectable.OnInteract();
+            yield return new WaitForSeconds(0.5f);
+        }
+
         while (!_isSolved) {
             yield return _currentRuleState.Autosolve();
+            yield return true;
         }
     }
 }

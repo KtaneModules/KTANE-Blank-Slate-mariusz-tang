@@ -27,6 +27,8 @@ public class HingesState : RuleStateController {
     private int _lowHinge;
     private int _highHinge;
 
+    private bool _isSolving;
+
     private void Start() {
         Array.ForEach(_hinges, h => h.SetSelectableActive(false));
     }
@@ -89,6 +91,7 @@ public class HingesState : RuleStateController {
     }
 
     public override IEnumerator SolveAnimation() {
+        _isSolving = true;
         List<int> remainingHinges = Enumerable.Range(0, 8).ToList();
         remainingHinges.Remove(_hingeToKill);
 
@@ -139,6 +142,13 @@ public class HingesState : RuleStateController {
 
         yield return null;
         yield return base.HandleTP(command);
+    }
+
+    public override IEnumerator Autosolve() {
+        if (_isSolving) {
+            yield break;
+        }
+        yield return base.Autosolve();
     }
 
 }

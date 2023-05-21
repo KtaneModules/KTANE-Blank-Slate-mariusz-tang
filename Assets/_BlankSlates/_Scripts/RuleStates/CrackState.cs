@@ -15,6 +15,8 @@ public class CrackState : RuleStateController {
     private int _originRegionNumber;
     private int _targetTime;
 
+    private bool _isPassing;
+
     public override IEnumerator OnStateEnter(Region pressedRegion) {
         _originRegionNumber = pressedRegion.Number;
         _originalTexture = _moduleRenderer.material.GetTexture("_MainTex");
@@ -65,6 +67,7 @@ public class CrackState : RuleStateController {
         }
         else {
             if (!_module.ReadyToSolve) {
+                _isPassing = true;
                 _module.BombAudio.PlaySoundAtTransform("Crack Backward", transform);
                 yield return new WaitForSeconds(1);
                 _moduleRenderer.material.SetTexture("_MainTex", _originalTexture);
@@ -75,9 +78,20 @@ public class CrackState : RuleStateController {
     }
 
     public override IEnumerator SolveAnimation() {
+        _isPassing = true;
         _module.BombAudio.PlaySoundAtTransform("Crack Forward", transform);
         _moduleRenderer.material.SetTexture("_MainTex", _solveTextures[_originRegionNumber - 1]);
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(base.SolveAnimation());
+    }
+
+    public override IEnumerator Autosolve() {
+        if (_isPassing) {
+            yield break;
+        }
+        while (Mathf.FloorToInt(_module.BombInfo.GetTime()) % 10 != _targetTime) {
+            yield return null;
+        }
+        yield return base.Autosolve();
     }
 }

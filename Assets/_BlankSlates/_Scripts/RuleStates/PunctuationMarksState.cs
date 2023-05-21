@@ -126,6 +126,8 @@ public class PunctuationMarksState : RuleStateController {
     }
 
     private IEnumerator LogicDive() {
+        _digitText.text = string.Empty;
+
         if (!_module.TpActive) {
             for (int i = 0; i < 6; i++) {
                 SetColours();
@@ -251,5 +253,20 @@ public class PunctuationMarksState : RuleStateController {
 
         yield return null;
         yield return base.HandleTP(command);
+    }
+
+    public override IEnumerator Autosolve() {
+        if (!_hasRevealedDigit && _logicDive == null) {
+            _module.Regions[_originRegionNumber - 1].Selectable.OnInteract();
+            yield return new WaitForSeconds(1);
+        }
+
+        if (_hasRevealedDigit) {
+            _module.Regions[_originRegionNumber - 1].Selectable.OnInteract();
+            yield return new WaitForSeconds(1);
+        }
+
+        _logicDiveButtons[_currentTargetPosition - 1].OnInteract();
+        yield return new WaitForSeconds(1);
     }
 }

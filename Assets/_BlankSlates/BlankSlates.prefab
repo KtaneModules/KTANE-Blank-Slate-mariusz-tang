@@ -898,6 +898,7 @@ GameObject:
   - component: {fileID: 4639869022653230}
   - component: {fileID: 33251765757597290}
   - component: {fileID: 23280426357621484}
+  - component: {fileID: 114381637429394200}
   m_Layer: 0
   m_Name: Component_PuzzleBackground
   m_TagString: Untagged
@@ -1212,6 +1213,7 @@ GameObject:
   - component: {fileID: 4798486784607350}
   - component: {fileID: 33957000247193196}
   - component: {fileID: 23454754713901362}
+  - component: {fileID: 114023842191676108}
   m_Layer: 0
   m_Name: Component_PuzzleBackground.002
   m_TagString: Untagged
@@ -2084,6 +2086,7 @@ GameObject:
   - component: {fileID: 4004524046971834}
   - component: {fileID: 33907196327136056}
   - component: {fileID: 23225228283393452}
+  - component: {fileID: 114231881486432714}
   m_Layer: 0
   m_Name: Component_PuzzleBackground.001
   m_TagString: Untagged
@@ -7948,6 +7951,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectable: {fileID: 114164056798460608}
+--- !u!114 &114023842191676108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1576095301075978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1005838349, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShaderNames:
+  - KT/Mobile/Diffuse
 --- !u!114 &114026401870786406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8404,7 +8420,7 @@ MonoBehaviour:
   AllowSelectionWrapX: 0
   AllowSelectionWrapY: 0
   ForceSelectionHighlight: 0
-  ForceInteractionHighlight: 1
+  ForceInteractionHighlight: 0
 --- !u!114 &114209229624863822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8467,6 +8483,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderNames:
   - KT/Mobile/DiffuseTint
+--- !u!114 &114231881486432714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863181577140338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1005838349, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShaderNames:
+  - KT/Mobile/Diffuse
 --- !u!114 &114241996580654938
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8876,6 +8905,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShaderNames:
   - GUI/Text Shader
+--- !u!114 &114381637429394200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1419974798329458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1005838349, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShaderNames:
+  - KT/Mobile/Diffuse
 --- !u!114 &114388580646069844
 MonoBehaviour:
   m_ObjectHideFlags: 1

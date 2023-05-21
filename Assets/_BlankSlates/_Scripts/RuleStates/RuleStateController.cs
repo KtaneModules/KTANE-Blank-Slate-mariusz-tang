@@ -81,7 +81,7 @@ public abstract class RuleStateController : MonoBehaviour {
     }
 
     public virtual IEnumerator Autosolve() {
-        throw new System.NotImplementedException();
+        _module.Regions[_targetRegionNumber - 1].Selectable.OnInteract();
+        yield return new WaitForSeconds(1);
     }
-
 }
