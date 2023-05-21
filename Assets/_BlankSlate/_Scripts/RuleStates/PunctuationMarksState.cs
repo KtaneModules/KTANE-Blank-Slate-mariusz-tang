@@ -237,6 +237,7 @@ public class PunctuationMarksState : RuleStateController {
                 yield return null;
                 // These are the only different lines.
                 _logicDiveButtons[firstDigit - 1].OnInteract();
+                yield break;
             }
             else if (splitCommands.Length == 4 && splitCommands[2] == "AT" && splitCommands[3].Length == 1 && char.IsDigit(char.Parse(splitCommands[3]))) {
                 yield return null;
@@ -245,6 +246,7 @@ public class PunctuationMarksState : RuleStateController {
                 }
                 // These are the only different lines.
                 _logicDiveButtons[firstDigit - 1].OnInteract();
+                yield break;
             }
             else {
                 yield return "sendtochaterror Invalid command!";
