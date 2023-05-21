@@ -10,7 +10,7 @@ public class PunctuationMarksState : RuleStateController {
     private const string COLOUR_ORDER = "ROYGBPKW";
     private const string CB_COLOUR_ORDER = "roygbp  ";
     private readonly Vector3 _cbButtonScale = new Vector3(0.02748407f, 0.002005622f, 0.02748407f);
-    private readonly Vector3 _logicDiveButtonScale = new Vector3(0.0002f, 0.00007f, 0.0002f);
+    private readonly Vector3 _logicDiveButtonScale = Vector3.one * 0.019956f;
     private readonly Vector3 _movingPartScaleSmall = new Vector3(1 / 3f, 1, 1 / 3f);
     private readonly Vector3 _movingPartScaleBig = Vector3.one;
     private readonly char[,] _colourTable = new char[,] {
@@ -258,15 +258,16 @@ public class PunctuationMarksState : RuleStateController {
     public override IEnumerator Autosolve() {
         if (!_hasRevealedDigit && _logicDive == null) {
             _module.Regions[_originRegionNumber - 1].Selectable.OnInteract();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
         }
+        Debug.Log("okay, " + _hasRevealedDigit.ToString());
 
         if (_hasRevealedDigit) {
             _module.Regions[_originRegionNumber - 1].Selectable.OnInteract();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
         }
 
         _logicDiveButtons[_currentTargetPosition - 1].OnInteract();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
     }
 }

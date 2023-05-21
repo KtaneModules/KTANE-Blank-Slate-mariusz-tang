@@ -82,6 +82,6 @@ public abstract class RuleStateController : MonoBehaviour {
 
     public virtual IEnumerator Autosolve() {
         _module.Regions[_targetRegionNumber - 1].Selectable.OnInteract();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
     }
 }

@@ -149,7 +149,6 @@ public class BlankSlatesModule : MonoBehaviour {
 
         while (!_isSolved) {
             yield return _currentRuleState.Autosolve();
-            yield return true;
         }
     }
 }
