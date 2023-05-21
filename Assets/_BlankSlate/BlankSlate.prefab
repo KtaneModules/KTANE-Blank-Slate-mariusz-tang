@@ -935,7 +935,7 @@ GameObject:
   - component: {fileID: 114205420700803376}
   - component: {fileID: 114190914454377284}
   m_Layer: 0
-  m_Name: BlankSlates
+  m_Name: BlankSlate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10010,8 +10010,8 @@ MonoBehaviour:
   m_Script: {fileID: -119419473, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ModuleType: BlankSlates
-  ModuleDisplayName: Blank Slates
+  ModuleType: BlankSlate
+  ModuleDisplayName: Blank Slate
   RequiresTimerVisibility: 1
 --- !u!114 &114755078110634492
 MonoBehaviour:

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public abstract class RuleStateController : MonoBehaviour {
 
-    protected BlankSlatesModule _module;
+    protected BlankSlateModule _module;
     protected int _targetRegionNumber;
 
     protected void Awake() {
-        _module = GetComponentInParent<BlankSlatesModule>();
+        _module = GetComponentInParent<BlankSlateModule>();
     }
 
     // On second thought, OnStateEnter and HandleRegionPress should not have been coroutines by default, but oh well.

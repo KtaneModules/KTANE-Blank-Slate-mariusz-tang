@@ -1,7 +1,7 @@
 {
-  "name": "blankslates-Editor",
+  "name": "blankslate-Editor",
   "references": [
-    "blankslates"
+    "blankslate"
   ],
   "includePlatforms": [
     "Editor"

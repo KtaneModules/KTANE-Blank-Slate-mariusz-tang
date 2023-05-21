@@ -4,7 +4,7 @@ using System.Linq;
 using KModkit;
 using UnityEngine;
 
-public class BlankSlatesModule : MonoBehaviour {
+public class BlankSlateModule : MonoBehaviour {
 
     private KMBombModule _module;
 
@@ -108,7 +108,7 @@ public class BlankSlatesModule : MonoBehaviour {
     }
 
     public void Log(string message) {
-        Debug.Log($"[Blank Slates #{_moduleId}] {message}");
+        Debug.Log($"[Blank Slate #{_moduleId}] {message}");
     }
 
     public void Strike(string message) {
