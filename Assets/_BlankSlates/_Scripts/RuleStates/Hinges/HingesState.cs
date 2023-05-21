@@ -43,7 +43,7 @@ public class HingesState : RuleStateController {
         }
 
         _targetRegionNumber = _module.AvailableRegions.PickRandom();
-        _highHinge = Enumerable.Range(0, 8).Where(i => _valueTable[i, _hingeToKill] != _targetRegionNumber && _valueTable[i, i] != _targetRegionNumber).PickRandom() + 1;
+        _highHinge = Enumerable.Range(0, 8).Where(i => _valueTable[i, pressedRegion.Number - 1] != _targetRegionNumber && _valueTable[i, i] != _targetRegionNumber && i != pressedRegion.Number - 1).PickRandom() + 1;
         _lowHinge = Enumerable.Range(0, 8).First(i => _valueTable[_highHinge - 1, i] == _targetRegionNumber) + 1;
         Array.ForEach(_hinges, h => h.Selectable.OnInteract += delegate () { HandleHingePress(h); return false; });
 
