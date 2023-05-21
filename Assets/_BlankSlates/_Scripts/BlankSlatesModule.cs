@@ -56,6 +56,7 @@ public class BlankSlatesModule : MonoBehaviour {
             return;
         }
 
+        // In hindsight, I should have just added an initial rule state (and maybe a solved rule state).
         if (_currentRuleState == null) {
             _initiallyPressedRegion = pressedRegion.Number;
             Log($"Pressed region {pressedRegion.Number}.");
@@ -120,5 +121,30 @@ public class BlankSlatesModule : MonoBehaviour {
         Log("Solved!");
         _isSolved = true;
         _module.HandlePass();
+    }
+
+#pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"Use '!{0} press <region> [at <digit>]' to press a region; regions are numbered 1-8 in reading order; " 
+                                                + "if a digit is specified, the region will be pressed when the last digit of the timer is that digit | "
+                                                + "'!{0} hover <region>' to hover over a region; chain regions to hover over with spaces. "
+                                                + "The following commands are section-specific: Section 5: '!{0} hinge <number>' to press a hinge; "
+                                                + "hinges are numbered 1-7, going clockwise from the missing hinge | "
+                                                + "Section 6: '!{0} <cb/colourblind/statuslight>' to toggle colourblind mode.";
+#pragma warning restore 414
+
+    private IEnumerator ProcessTwitchCommand(string command) {
+        // Really should have just made an initial state, but too late now ig.
+        if (_currentRuleState == null) {
+            return _polygons.HandleTP(command);
+        }
+        return _currentRuleState.HandleTP(command);
+    }
+
+
+    private IEnumerator TwitchHandleForcedSolve() {
+        yield return null;
+        while (!_isSolved) {
+            yield return _currentRuleState.Autosolve();
+        }
     }
 }

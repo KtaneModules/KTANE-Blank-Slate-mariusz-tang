@@ -201,4 +201,55 @@ public class PunctuationMarksState : RuleStateController {
         return base.SolveAnimation();
     }
 
+    private string[] _cbCommands = new string[] { "CB", "COLORBLIND", "COLOURBLIND", "STATUSLIGHT", "STATUS LIGHT", "SL" };
+
+    public override IEnumerator HandleTP(string command) {
+        if (_cbCommands.Contains(command.Trim().ToUpper())) {
+            yield return null;
+            _cbButton.OnInteract();
+            yield break;
+        }
+
+        // This is mostly repeated code but oh well <|3.
+        if (_logicDive == null) {
+            yield return null;
+            yield return base.HandleTP(command);
+            yield break;
+        }
+
+        // Need to handle pressing logic dive buttons :(.
+        string[] splitCommands = command.Trim().ToUpper().Split(' ');
+
+        if (splitCommands.Length < 2 || splitCommands[1].Length != 1 || !char.IsDigit(char.Parse(splitCommands[1]))) {
+            yield return "sendtochaterror Invalid command!";
+        }
+
+        int firstDigit = int.Parse(splitCommands[1]);
+
+        if (firstDigit < 1 || firstDigit > 8) {
+            yield return $"sendtochaterror '{firstDigit}' is not a valid region!";
+        }
+
+        if (splitCommands[0] == "PRESS") {
+            if (splitCommands.Length == 2) {
+                yield return null;
+                // These are the only different lines.
+                _logicDiveButtons[firstDigit - 1].OnInteract();
+            }
+            else if (splitCommands.Length == 4 && splitCommands[2] == "AT" && splitCommands[3].Length == 1 && char.IsDigit(char.Parse(splitCommands[3]))) {
+                yield return null;
+                while (Mathf.FloorToInt(_module.BombInfo.GetTime()) % 10 != int.Parse(splitCommands[3])) {
+                    yield return "trycancel";
+                }
+                // These are the only different lines.
+                _logicDiveButtons[firstDigit - 1].OnInteract();
+            }
+            else {
+                yield return "sendtochaterror Invalid command!";
+            }
+        }
+
+        yield return null;
+        yield return base.HandleTP(command);
+    }
 }

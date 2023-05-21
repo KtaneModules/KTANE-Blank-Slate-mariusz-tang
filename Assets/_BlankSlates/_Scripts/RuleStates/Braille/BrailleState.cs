@@ -67,7 +67,6 @@ public class BrailleState : RuleStateController {
     [SerializeField] private BrailleDisplay _brailleGrid;
 
     private int _originRegionNumber;
-    private int _targetRegionNumber;
     private int _wordNumber;
 
     private string[] _flashingWordSplit;

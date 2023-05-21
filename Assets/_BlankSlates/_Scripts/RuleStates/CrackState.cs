@@ -13,7 +13,6 @@ public class CrackState : RuleStateController {
 
     private Texture _originalTexture;
     private int _originRegionNumber;
-    private int _targetRegionNumber;
     private int _targetTime;
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {

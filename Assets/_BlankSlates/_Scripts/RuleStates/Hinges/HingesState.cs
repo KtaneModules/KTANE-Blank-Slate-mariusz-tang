@@ -26,7 +26,6 @@ public class HingesState : RuleStateController {
     private int _hingeToKill;
     private int _lowHinge;
     private int _highHinge;
-    private int _targetRegionNumber;
 
     private void Start() {
         Array.ForEach(_hinges, h => h.SetSelectableActive(false));
@@ -107,11 +106,39 @@ public class HingesState : RuleStateController {
 
         yield return StartCoroutine(base.SolveAnimation());
         // This needs to be done because apparently unity does NOT like the TP overlay on non-kinematic rigidbodies.
-        _moduleRigidBody.isKinematic = false; 
+        _moduleRigidBody.isKinematic = false;
         _moduleRigidBody.AddForceAtPosition(new Vector3(randomNumbers.PickRandom(), randomNumbers.PickRandom(), randomNumbers.PickRandom()), new Vector3(x, y, z));
 
         yield return new WaitForSeconds(10);
         _moduleRigidBody.gameObject.SetActive(false);
+    }
+
+    public override IEnumerator HandleTP(string command) {
+        // This is mostly repeated code :|
+        string[] splitCommands = command.Trim().ToUpper().Split(' ');
+
+        if (splitCommands.Length < 2 || splitCommands[1].Length != 1 || !char.IsDigit(char.Parse(splitCommands[1]))) {
+            yield return "sendtochaterror Invalid command!";
+        }
+
+        int firstDigit = int.Parse(splitCommands[1]);
+
+        if (firstDigit < 1 || firstDigit > 7) {
+            yield return $"sendtochaterror '{firstDigit}' is not a valid hinge!";
+        }
+
+        if (splitCommands[0] == "HINGE") {
+            if (splitCommands.Length == 2) {
+                yield return null;
+                _hinges[(_hingeToKill + firstDigit) % 8].Selectable.OnInteract();
+            }
+            else {
+                yield return "sendtochaterror Invalid command!";
+            }
+        }
+
+        yield return null;
+        yield return base.HandleTP(command);
     }
 
 }

@@ -19,7 +19,6 @@ public class PolygonsState : RuleStateController {
     private Action _unhighlightShape;
 
     private Region _originRegion;
-    private int _targetRegionNumber;
 
     public bool CanPickEven { get; private set; }
     public bool CanPickOdd { get; private set; }

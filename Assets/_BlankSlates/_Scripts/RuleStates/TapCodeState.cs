@@ -21,7 +21,6 @@ public class TapCodeState : RuleStateController {
 
     private string _tappedWord;
     private int _originRegionNumber;
-    private int _targetRegionNumber;
 
     private Coroutine _playingTapCode;
 

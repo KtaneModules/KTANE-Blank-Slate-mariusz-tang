@@ -13,7 +13,6 @@ public class FourtyTwoState : RuleStateController {
     [SerializeField] private TextMesh[] _textMeshes;
 
     private int _originRegionNumber;
-    private int _targetRegionNumber;
     private int[][] _numberSequences;
     private Coroutine _cycling;
 

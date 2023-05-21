@@ -8,8 +8,6 @@ public class HipsState : RuleStateController {
 
     [SerializeField] private TextMesh[] _textMeshes;
 
-    private int _targetRegionNumber;
-
     private Coroutine _highlightsActive;
     private int _highlightedRegionNumber;
 
