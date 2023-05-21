@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1">
+    <title>Blank Slate — Keep Talking and Nobody Explodes Module</title>
+    <link rel="stylesheet" type="text/css" href="css/font.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="js/ktane-utils.js"></script>
+    <style>
+        .region-diagram :not(text) {
+            fill: transparent;
+            stroke-width: 2px;
+            stroke: black;
+        }
+        .region-diagram text {
+            stroke-width: 2px;
+            text-align: center;
+            text-anchor: middle;
+            pointer-events: none;
+            user-select: none;
+        }
+        .dark .region-diagram :not(text) {
+            stroke:#ddd;
+        }
+        .dark .region-diagram text {
+            fill:#ddd;
+        }
+        .table-header { background-color: #AAA; } 
+        .dark .table-header {background-color: #666; }
+        .page-footer::before { content: 'Page '; }
+        .page-footer::after { content: ' of 7'; }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <div class="page page-bg-01">
+            <div class="page-header">
+                <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
+                <span class="page-header-section-title">Blank Slate</span>
+            </div>
+            <div class="page-content">
+                <img src="img/Component/Blank Slate.svg" class="diagram">
+                <h2>On the Subject of Blank Slates</h2>
+                <p class="flavour-text">This. Here.</p>
+                <p>
+                    A Blank Slate module initially appears blank. Hovering over the module will reveal the sound of eight
+                    touch-sensitive regions.To begin the module, touch any of the eight regions.
+                </p>
+                <p>
+                    After a region is touched, something will happen. Find the section in the manual based on what happened,
+                    and follow the rules according to that section to find the next region to touch. Repeat this process until
+                    eight rules have been followed. The module will then solve.
+                </p>
+                <p>
+                    If an incorrect region is touched, a strike is issued, but the process for finding the next region to touch
+                    will not change unless otherwise stated.
+                </p>
+                <p>
+                    The eight regions are outlined and numbered as shown below. The regions wrap around, i.e. going forward from
+                    region 8 takes you to region 1 and vice versa.
+                </p>
+                <svg class="region-diagram centered-img" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" font-size="40px" width="65%" style="margin-top:10%">
+                    <rect x="2" y="2" width="296" height="296" style="stroke-width:4px"></rect>
+                    <circle cx="265" cy="35" r="20" style="stroke-width:3px"></circle>
+                    <path class="highlightable" d="M2 2 H100 V100 H2z"></path>
+                    <path class="highlightable" d="M2 100 H100 V200 H2z"></path>
+                    <path class="highlightable" d="M2 200 H100 V298 H2z"></path>
+                    <path class="highlightable" d="M100 2 H200 V100 H100z"></path>
+                    <path class="highlightable" d="M100 100 H200 V200 H100z"></path>
+                    <path class="highlightable" d="M100 200 H200 V298 H100z"></path>
+                    <path class="highlightable" d="M200 100 H298 V200 H200z"></path>
+                    <path class="highlightable" d="M200 200 H298 V298 H200z"></path>
+                    <text x="50" y="63">1</text>
+                    <text x="150" y="63">2</text>
+                    <text x="50" y="163">3</text>
+                    <text x="150" y="163">4</text>
+                    <text x="250" y="163">5</text>
+                    <text x="50" y="263">6</text>
+                    <text x="150" y="263">7</text>
+                    <text x="250" y="263">8</text>
+                </svg>
+            </div>
+            <div class="page-footer relative-footer">1</div>
+        </div>
+
+        <div class="page page-bg-02">
+            <div class="page-header">
+                <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
+                <span class="page-header-section-title">Orientation Hypercube</span>
+            </div>
+            <div class="page-content">
+                <h3>Section 1: Region Starts Cycling Braille</h3>
+                <p>
+                    Use this section if the previously-touched region starts to cycle between three Braille characters. Touch
+                    this region again to replay the sequence. The first character will be shown in red, the second in green,
+                    and the third in blue.
+                </p>
+                <p>
+                    Three of the dots across the Braille characters are incorrect — they are either raised when they should not
+                    be, or vice versa. To figure out which of the three dots are inverted, do the following:
+                </p>
+                <ul>
+                    <li>
+                        Look at the left image below. Reference the previously-touched region to determine three positions in
+                        the serial number to look at.
+                    </li>
+                    <li>
+                        Take the characters in those positions, converting any letters to their alphabetic positions (A = 1,
+                        B = 2, .., Z = 26). If any of these numbers are greater than 18, subtract 18, then change any 0s to 1s.
+                    </li>
+                    <li>
+                        Lay out the three Braille characters in order of transmission. Toggle the state of the Braille dots in
+                        the positions corresponding to the obtained numbers, in
+                        <a href="https://ktane.timwi.de/HTML/Touch%20Transmission.html">individual reading order</a> (it is possible
+                        for a dot to be inverted more than once).
+                    </li>
+                </ul>
+                <p>
+                    Once this is done, the newly-obtained Braille characters will spell out a word. Find the word in the right image
+                    below to get the region to touch next.
+                </p>
+                <svg class="region-diagram centered-img" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" font-size="30px" width="45%" style="float:left;margin-top:5%">
+                    <rect x="2" y="2" width="296" height="296" style="stroke-width:4px"></rect>
+                    <circle cx="265" cy="35" r="20" style="stroke-width:3px"></circle>
+                    <path class="highlightable" d="M2 2 H100 V100 H2z"></path>
+                    <path class="highlightable" d="M2 100 H100 V200 H2z"></path>
+                    <path class="highlightable" d="M2 200 H100 V298 H2z"></path>
+                    <path class="highlightable" d="M100 2 H200 V100 H100z"></path>
+                    <path class="highlightable" d="M100 100 H200 V200 H100z"></path>
+                    <path class="highlightable" d="M100 200 H200 V298 H100z"></path>
+                    <path class="highlightable" d="M200 100 H298 V200 H200z"></path>
+                    <path class="highlightable" d="M200 200 H298 V298 H200z"></path>
+                    <text x="50" y="61">1 2 3</text>
+                    <text x="150" y="61">4 5 6</text>
+                    <text x="50" y="160">1 3 5</text>
+                    <text x="150" y="160">2 4 6</text>
+                    <text x="250" y="160">1 3 4</text>
+                    <text x="50" y="259">2 5 6</text>
+                    <text x="150" y="259">1 4 6</text>
+                    <text x="250" y="259">2 3 5</text>
+                </svg>
+                <svg class="region-diagram centered-img" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" font-size="20px" width="45%" style="float:right;margin-top:5%">
+                    <rect x="2" y="2" width="296" height="296" style="stroke-width:4px"></rect>
+                    <circle cx="265" cy="35" r="20" style="stroke-width:3px"></circle>
+                    <path class="highlightable" d="M2 2 H100 V100 H2z"></path>
+                    <path class="highlightable" d="M2 100 H100 V200 H2z"></path>
+                    <path class="highlightable" d="M2 200 H100 V298 H2z"></path>
+                    <path class="highlightable" d="M100 2 H200 V100 H100z"></path>
+                    <path class="highlightable" d="M100 100 H200 V200 H100z"></path>
+                    <path class="highlightable" d="M100 200 H200 V298 H100z"></path>
+                    <path class="highlightable" d="M200 100 H298 V200 H200z"></path>
+                    <path class="highlightable" d="M200 200 H298 V298 H200z"></path>
+                    <text x="50" y="35">ends</text>
+                    <text x="50" y="57">down</text>
+                    <text x="50" y="79">team</text>
+                    <text x="148" y="35">owns</text>
+                    <text x="148" y="57">yes</text>
+                    <text x="148" y="79">box</text>
+                    <text x="50" y="135">line</text>
+                    <text x="50" y="157">run</text>
+                    <text x="50" y="179">cent</text>
+                    <text x="148" y="135">shot</text>
+                    <text x="148" y="157">echo</text>
+                    <text x="148" y="179">easy</text>
+                    <text x="248" y="135">sir</text>
+                    <text x="248" y="157">stay</text>
+                    <text x="248" y="179">stars</text>
+                    <text x="50" y="235">hat</text>
+                    <text x="50" y="257">host</text>
+                    <text x="50" y="279">fan</text>
+                    <text x="148" y="235">bee</text>
+                    <text x="148" y="257">weak</text>
+                    <text x="148" y="279">wet</text>
+                    <text x="248" y="235">shown</text>
+                    <text x="248" y="257">pop</text>
+                    <text x="248" y="279">though</text>
+                </svg>
+
+            </div>
+            <div class="page-footer relative-footer">2</div>
+        </div>
+
+        <div class="page page-bg-03">
+            <div class="page-header">
+                <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
+                <span class="page-header-section-title">Orientation Hypercube</span>
+            </div>
+            <div class="page-content">
+                <h3>Section 2: Tap Code Plays</h3>
+                <p>Use this section if tap code started playing after touching the previous region. Touch this region again to replay the transmission.</p>
+                <p>
+                    A three-letter word is being transmitted. Look up the word in the table below. Touch the region which is as
+                    many regions forward from the previously-touched region as the number in the same row as the word.
+                </p>
+                <table style="width:100%;text-align:center">
+                    <colgroup>
+                        <col class="table-header" style="width:16%"/>
+                        <col span="5" style="width:auto"/>
+                    </colgroup>
+                    <tr><th>1</th><td>roe</td><td>law</td><td>raj</td><td>tee</td><td>not</td></tr>
+                    <tr><th>2</th><td>phi</td><td>jay</td><td>orb</td><td>mol</td><td>put</td></tr>
+                    <tr><th>3</th><td>rue</td><td>one</td><td>led</td><td>nun</td><td>pal</td></tr>
+                    <tr><th>4</th><td>ore</td><td>jug</td><td>see</td><td>pea</td><td>leg</td></tr>
+                    <tr><th>5</th><td>yes</td><td>now</td><td>ted</td><td>hen</td><td>sac</td></tr>
+                    <tr><th>6</th><td>wee</td><td>wry</td><td>mac</td><td>son</td><td>nil</td></tr>
+                    <tr><th>7</th><td>rib</td><td>yen</td><td>try</td><td>zoo</td><td>pit</td></tr>
+                </table>
+                <h3>Section 3: Module Cracks</h3>
+                <p>Oh, no. Not again. Don't worry, we can fix this.</p>
+                <p>
+                    Take the digital root of the serial number digits, and consider the region with this number. If the result
+                    is 0 or 9, instead move backwards a number of regions equal to the last digit of the serial number, starting from the
+                    previously-touched region.
+                </p>
+                <p>
+                    If the result is a previously-touched region, move forwards from this region, three regions at a time, until
+                    you reach a region you have not yet touched.
+                </p>
+                <p>Touch the resulting region when the last digit in the bomb's timer is the same as the first digit of the serial number.</p>
+                <p>Once this is done, the module will heal itself, and the region used to fix the module will cause its unique event.</p>
+                <p>Sorry about that.</p>
+            </div>
+            <div class="page-footer relative-footer">3</div>
+        </div>
+
+        <div class="page page-bg-04">
+            <div class="page-header">
+                <span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
+                <span class="page-header-section-title">Orientation Hypercube</span>
+            </div>
+            <div class="page-content">
+                <h3>Section 4: Polygon Appears</h3>
+                <p>Use this section if a polygon appears on the previously-touched region. Look up the polygon in the diagram below:</p>
+                
+            </div>
+            <div class="page-footer relative-footer">4</div>
+        </div>
+    </div>
+</body>
+</html>
