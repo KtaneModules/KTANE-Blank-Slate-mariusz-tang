@@ -129,7 +129,8 @@ public class BlankSlateModule : MonoBehaviour {
                                                 + "'!{0} hover <region>' to hover over a region; chain regions to hover over with spaces. "
                                                 + "The following commands are section-specific: Section 5: '!{0} hinge <number>' to press a hinge; "
                                                 + "hinges are numbered 1-7, going clockwise from the missing hinge | "
-                                                + "Section 6: '!{0} <cb/colourblind/statuslight>' to toggle colourblind mode.";
+                                                + "Section 6: '!{0} <cb/colourblind/statuslight>' to toggle colourblind mode; "
+                                                + "on TP, the colours will not shuffle around, and you have 15 seconds instead of 6.";
 #pragma warning restore 414
 
     private IEnumerator ProcessTwitchCommand(string command) {
