@@ -14,7 +14,19 @@ MonoBehaviour:
   id: blankslate
   title: Blank Slate
   author: Kuro
-  description: ye
+  description: 'This. Here.
+
+
+    Press the eight different segments on the module in the correct order based on
+    the odd behaviour of the module when the segments are pressed.
+
+
+    Manual can be found at ktane.timwi.de or in the manuals folder of your game.
+
+
+    Manual by Asew54321.
+
+    Report bugs to Kuro#2011 on Discord.'
   version: 1
   outputFolder: build
-  previewImage: {fileID: 0}
+  previewImage: {fileID: 2800000, guid: 6bb541413c81eb84ab0b2ceea2c10047, type: 3}
