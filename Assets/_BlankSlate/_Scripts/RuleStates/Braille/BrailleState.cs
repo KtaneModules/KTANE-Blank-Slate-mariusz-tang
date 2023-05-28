@@ -153,7 +153,7 @@ public class BrailleState : RuleStateController {
                 invertPosition = character - '0';
             }
             else {
-                invertPosition = (character - 'A' + 1) % 18;
+                invertPosition = (character - 'A') % 18 + 1;
             }
 
             if (invertPosition == 0) {
