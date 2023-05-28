@@ -47,7 +47,7 @@ public class BrailleState : RuleStateController {
         { new string[] { "ow", "n", "s" }, new string[] { "y", "e", "s" }, new string[] { "b", "o", "x" } },
         { new string[] { "l", "in", "e" }, new string[] { "r", "u", "n" }, new string[] { "c", "en", "t" } },
         { new string[] { "sh", "o", "t" }, new string[] { "e", "ch", "o" }, new string[] { "ea", "s", "y" } },
-        { new string[] { "s", "i", "r" }, new string[] { "s", "a", "y" }, new string[] { "st", "ar", "s" } },
+        { new string[] { "s", "i", "r" }, new string[] { "st", "a", "y" }, new string[] { "st", "ar", "s" } },
         { new string[] { "h", "a", "t" }, new string[] { "h", "o", "st" }, new string[] { "f", "a", "n" } },
         { new string[] { "b", "e", "e" }, new string[] { "w", "ea", "k" }, new string[] { "w", "e", "t" } },
         { new string[] { "sh", "ow", "n" }, new string[] { "p", "o", "p" }, new string[] { "th", "ou", "gh" } },
