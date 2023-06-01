@@ -146,6 +146,7 @@ public class HingesState : RuleStateController {
 
     public override IEnumerator Autosolve() {
         if (_isSolving) {
+            yield return null;
             yield break;
         }
         yield return base.Autosolve();

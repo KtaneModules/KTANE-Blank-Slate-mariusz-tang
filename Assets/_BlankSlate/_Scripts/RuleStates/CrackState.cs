@@ -87,6 +87,7 @@ public class CrackState : RuleStateController {
 
     public override IEnumerator Autosolve() {
         if (_isPassing) {
+            yield return null;
             yield break;
         }
         while (Mathf.FloorToInt(_module.BombInfo.GetTime()) % 10 != _targetTime) {
