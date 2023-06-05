@@ -14,7 +14,6 @@ public class BlankSlateModule : MonoBehaviour {
 
     [SerializeField] private Region[] _regions;
     // Polygons is special in that in rare cases it is unable to pick an odd region or an even region.
-    // Punctuation marks is special in that it the correct region is undecided, so it must not be last.
     [SerializeField] private RuleStateController[] _rulesStatesMinusPolygons;
     [SerializeField] private PolygonsState _polygons;
 
@@ -36,7 +35,6 @@ public class BlankSlateModule : MonoBehaviour {
         _moduleId = _moduleCounter++;
         _module = GetComponent<KMBombModule>();
         _availableRuleStates = Enumerable.Range(0, _rulesStatesMinusPolygons.Count() + 1).ToList();
-        // ! _availableRuleStates = new List<int> { 1 };
 
         BombInfo = GetComponent<KMBombInfo>();
         BombAudio = GetComponent<KMAudio>();
@@ -56,7 +54,6 @@ public class BlankSlateModule : MonoBehaviour {
             return;
         }
 
-        // In hindsight, I should have just added an initial rule state (and maybe a solved rule state).
         if (_currentRuleState == null) {
             _initiallyPressedRegion = pressedRegion.Number;
             Log($"Pressed region {pressedRegion.Number}.");
@@ -134,7 +131,6 @@ public class BlankSlateModule : MonoBehaviour {
 #pragma warning restore 414
 
     private IEnumerator ProcessTwitchCommand(string command) {
-        // Really should have just made an initial state, but too late now ig.
         if (_currentRuleState == null) {
             return _polygons.HandleTP(command);
         }
