@@ -124,16 +124,17 @@ public class HingesState : RuleStateController {
             yield return "sendtochaterror Invalid command!";
         }
 
-        int firstDigit = int.Parse(splitCommands[1]);
-
-        if (firstDigit < 1 || firstDigit > 7) {
-            yield return $"sendtochaterror '{firstDigit}' is not a valid hinge!";
-        }
-
         if (splitCommands[0] == "HINGE") {
             if (splitCommands.Length == 2) {
+                int firstDigit = int.Parse(splitCommands[1]);
+
+                if (firstDigit < 1 || firstDigit > 7) {
+                    yield return $"sendtochaterror '{firstDigit}' is not a valid hinge!";
+                }
+
                 yield return null;
                 _hinges[(_hingeToKill + firstDigit) % 8].Selectable.OnInteract();
+                yield break;
             }
             else {
                 yield return "sendtochaterror Invalid command!";
