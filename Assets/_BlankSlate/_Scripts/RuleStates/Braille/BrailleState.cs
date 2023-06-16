@@ -125,7 +125,7 @@ public class BrailleState : RuleStateController {
         List<int> invertedPositions = GetInvertedPositions();
 
         for (int i = 0; i < 3; i++) {
-            flashingDots[i] = _braille[flashingWordSplit[i]];
+            flashingDots[i] = _braille[flashingWordSplit[i]].ToList();
 
             foreach (int invertPosition in invertedPositions) {
                 if (invertPosition > 6 * i && invertPosition <= 6 * (i + 1)) {
