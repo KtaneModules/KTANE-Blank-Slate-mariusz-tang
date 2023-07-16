@@ -80,6 +80,12 @@ public class PunctuationMarksState : RuleStateController {
     }
 
     public override IEnumerator OnStateEnter(Region pressedRegion) {
+        if (_module.GetComponent<KMColorblindMode>().ColorblindModeActive) {
+            ToggleCbMode();
+            StopCoroutine(_displayCbModeInfo);
+            _cbInfoText.text = string.Empty;
+        }
+
         _originRegionNumber = pressedRegion.Number;
         _displayDigit = Rnd.Range(1, 9);
 

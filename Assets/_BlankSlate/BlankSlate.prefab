@@ -933,6 +933,7 @@ GameObject:
   - component: {fileID: 114152759593357208}
   - component: {fileID: 114749115275157980}
   - component: {fileID: 114205420700803376}
+  - component: {fileID: 114012927372272640}
   - component: {fileID: 114190914454377284}
   m_Layer: 0
   m_Name: BlankSlate
@@ -7926,6 +7927,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectable: {fileID: 114866894183533110}
+--- !u!114 &114012927372272640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1415273833388058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1cfb889a07d5fd4e9baed7960bb397f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorblindMode: 0
 --- !u!114 &114020850073235970
 MonoBehaviour:
   m_ObjectHideFlags: 1
