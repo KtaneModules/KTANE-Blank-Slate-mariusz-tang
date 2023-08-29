@@ -49,6 +49,7 @@ public class PunctuationMarksState : RuleStateController {
     private Color _targetColour;
 
     private Coroutine _logicDive;
+    private bool _isLogicDive = false;
     private int _currentTargetPosition;
 
     private void Start() {
@@ -125,6 +126,7 @@ public class PunctuationMarksState : RuleStateController {
             _digitText.text = string.Empty;
         }
         else {
+            _isLogicDive = true;
             SetButtonsActive(true);
             _logicDive = StartCoroutine(LogicDive());
             _hasRevealedDigit = false;
@@ -146,6 +148,7 @@ public class PunctuationMarksState : RuleStateController {
         }
         _module.Strike("Took too long to press a region. Strike!");
         SetButtonsActive(false);
+        _isLogicDive = false;
     }
 
     private void SetColours() {
@@ -168,6 +171,7 @@ public class PunctuationMarksState : RuleStateController {
 
     private IEnumerator HandleButtonPress(int buttonNumber) {
         StopCoroutine(_logicDive);
+        _isLogicDive = false;
         SetButtonsActive(false);
 
         if (buttonNumber == _currentTargetPosition) {
@@ -219,7 +223,7 @@ public class PunctuationMarksState : RuleStateController {
         }
 
         // This is mostly repeated code but oh well <|3.
-        if (_logicDive == null) {
+        if (!_isLogicDive) {
             yield return null;
             yield return base.HandleTP(command);
             yield break;
@@ -264,12 +268,10 @@ public class PunctuationMarksState : RuleStateController {
     }
 
     public override IEnumerator Autosolve() {
-        if (!_hasRevealedDigit && _logicDive == null) {
+        if (!_hasRevealedDigit && !_isLogicDive) {
             _module.Regions[_originRegionNumber - 1].Selectable.OnInteract();
             yield return new WaitForSeconds(0.5f);
         }
-        Debug.Log("okay, " + _hasRevealedDigit.ToString());
-
         if (_hasRevealedDigit) {
             _module.Regions[_originRegionNumber - 1].Selectable.OnInteract();
             yield return new WaitForSeconds(0.5f);
